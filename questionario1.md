@@ -3,6 +3,17 @@
 
 1. Describa brevemente las diferencias entre las familias de procesadores Cortex M0, M3 y
 M4.
+
+> Respuesta:
+> 
+> El Cortex-M3 y el Cortex-M4 son núcleos muy similares. Cada uno ofrece un rendimiento de 1,25 DMIPS/MHz con un Pipeline de 3 etapas, múltiples buses de 32 bits, velocidades de reloj de hasta 200 MHz y opciones de depuración muy eficientes. La diferencia significativa es la capacidad del núcleo Cortex-M4 para DSP. El Cortex-M3 y el Cortex-M4 comparten la
+misma arquitectura y conjunto de instrucciones Thumb-2. Sin embargo, el Cortex-M4 agrega una “gama de saturación” e instrucciones SIMD específicamente optimizadas para manejar algoritmos DSP. Por ejemplo, en el caso de un algoritmo “512 FFT point” que se ejecuta cada 0,5 segundos, en un MCU Cortex M3 y Cortex M4, en comparación, el Cortex-M3 consumiría alrededor de tres veces la energía que necesitaría un Cortex-M4 para el mismo trabajo. También existe la opción de obtener una unidad de punto flotante (FPU) de precisión única en un Cortex-M4, por lo que si la aplicación requiere matemáticas de punto flotante, será considerablemente más rápido usar un Cortex-M4 de lo que lo sería en un Cortex-M3. Dicho esto, para una aplicación que no utiliza las capacidades DSP o FPU del Cortex-M4, verá el mismo nivel de rendimiento y consumo de energía en un Cortex-M3. 
+> 
+> Para aplicaciones que son particularmente sensibles a los costos o que están migrando de 8 bits a 32 bits, el más pequeño miembro de la serie Cortex-M podría ser la mejor opción. El rendimiento de Cortex M0+ se encuentra un poco por debajo del Cortex-M3 y Cortex-M4 a 0,95 DMIPS/MHz (contra los 1.25 mencionados anteriormente) pero sigue siendo compatible con sus hermanos mayores. El Cortex M0+ usa un subconjunto del conjunto de instrucciones Thumb-2, y esas instrucciones son predominantemente operandos de 16 bits (aunque todas las operaciones de datos son de 32 bits), que se prestan muy bien a la canalización de 2 etapas que ofrece el Cortex M0+. Esto trae un ahorro general de energía al sistema a través de la reducción de la ramificación shadow, y la canalización en la mayoría de los casos contendrá las siguientes cuatro instrucciones. El Cortex-M0+ también tiene un bus dedicado para GPIO de ciclo único, lo que significa que puede implementar ciertas interfaces con GPIO basado en bits como lo haría en una MCU de 8 bits pero con el rendimiento de un núcleo de 32 bits para procesar los datos.
+> 
+> Otra diferencia clave en el Cortex M0+ es la adición del búfer de micro trazas (MTB). Estos periféricos le permiten dedicar parte de la memoria RAM del chip para almacenar ramas del programa durante la depuración. Estas ramas se pueden volver a pasar al entorno de desarrollo integrado (IDE), y el flujo del programa  puede ser reconstruido. Esta capacidad proporciona una forma rudimentaria de seguimiento de instrucciones y compensa el hecho de no tener la macrocélula de seguimiento extendida (ETM) que se encuentra en los Cortex-M3 y Cortex-M4. El nivel de información de depuración que puede extraer de un Cortex M0+ es significativamente mayor que el que puede obtener de una MCU de 8 bits, lo que significa que esos errores difíciles de resolver ahora son más fáciles de corregir.
+> 
+
 2. ¿Por qué se dice que el set de instrucciones Thumb permite mayor densidad de código?
 Explique
 3. ¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este
