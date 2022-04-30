@@ -21,7 +21,8 @@ Explique
 > 
 > Respuesta:
 > 
-> Entendiendo la densidad de código como la cantidad de funcionalidad posible por tamaño de instrucción, y basándose en los artículos [Performance, code density and operating states](https://developer.arm.com/documentation/dvi0027/b/arm7tdmi/performance--code-density-and-operating-states) y [The Thumb instruction set](https://developer.arm.com/documentation/ddi0210/c/CACBCAAE), las instrucciones Thumb son un subconjunto de las instrucciones ARM permitiendo la misma funcionalidad pero son almacenadas en un código de 16 bits en lugar de 32 bits, por lo que se dice que son más densas. Su ejecución y tratamiento es transparente en tiempo de ejecución, puesto que estas instrucciones son descomprimidas a instrucciones ARM completas de 32 bits sin pérdida de rendimiento.
+> Entendiendo la densidad de código como la cantidad de funcionalidad posible por tamaño de instrucción, y basándose en los artículos [Performance, code density and operating states](https://developer.arm.com/documentation/dvi0027/b/arm7tdmi/performance--code-density-and-operating-states) y [The Thumb instruction set](https://developer.arm.com/documentation/ddi0210/c/CACBCAAE), las instrucciones Thumb son un subconjunto de las instrucciones ARM permitiendo la misma funcionalidad pero son almacenadas en un código de 16 bits en lugar de 32 bits, por lo que se dice que son más densas. Su ejecución y tratamiento es transparente en tiempo de ejecución, puesto que estas instrucciones son descomprimidas a instrucciones ARM completas de 32 bits sin pérdida de rendimiento como se puede inferir de la siguiente cita de uno de los articulos mencionados: “Thumb code is typically 65% of the size of ARM code, and provides 160% of the performance of ARM code when running from a 16-bit memory system. Thumb, therefore, makes the ARM7TDMI core ideally suited to embedded applications with restricted memory bandwidth, where code density and footprint is important.”
+> 
 > 
 > 
 
@@ -31,7 +32,10 @@ tipo de arquitectura?
 > 
 > Respuesta:
 > 
-> Segun la definicion de [Wikipedia] (https://en.wikipedia.org/wiki/Load%E2%80%93store_architecture), una arquitectura de almacenamiento de carga es una arquitectura de conjunto de instrucciones que divide las instrucciones en dos categorías: acceso a la memoria (carga y almacenamiento entre la memoria y los registros) y operaciones ALU (que solo ocurren entre registros). Por ejemplo, en un enfoque load-store, tanto los operandos como el destino de una operación ADD deben estar en registros del CPU, a diferencia de una arquitectura de [register-memory architecture] (https://en.wikipedia.org/wiki/Register-memory_architecture) (por ejemplo, una arquitectura de conjunto de instrucciones CISC como x86) en la que uno de los operandos para la operación ADD puede estar en la memoria, mientras que el otro está en un registro.
+> Basandome en [Wikipedia] (https://en.wikipedia.org/wiki/Load%E2%80%93store_architecture) y el articulo [Memory Instructions: Load and Store](https://azeria-labs.com/memory-instructions-load-and-store-part-4/), una arquitectura load-store es basicamente un modelo seguido por el set de instrucciones (o un sub-set del mismo) para la ejecucion de instrucciones que necesitan acceso a memoria. En este approach solo las instrucciones LDR y STR pueden acceder a memoria de forma directa para traer o almacenar datos cargandolos o leyéndolos de registros del CPU, mientras que el resto de las instrucciones, trabajan solamente con valores almacenados en el CPU. Por lo tanto esta arquitectura no posee instrucciones que operan con valores directamente en memoria de forma.
+> La arquitectura opuesta es [register-memory architecture](https://en.wikipedia.org/wiki/Register-memory_architecture) en la que básicamente se permite que las instrucciones trabajen con valores directamente en memoria. 
+> Las arquitecturas ARM utilizan el modelo load-store mientras que las x86 register-memory.
+> 
 > 
 > 
 
