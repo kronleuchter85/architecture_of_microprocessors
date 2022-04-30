@@ -16,6 +16,10 @@ misma arquitectura y conjunto de instrucciones Thumb-2. Sin embargo, el Cortex-M
 
 2. ¿Por qué se dice que el set de instrucciones Thumb permite mayor densidad de código?
 Explique
+
+> Entendiendo la densidad de código como la cantidad de funcionalidad posible por tamaño de instrucción, y basándose en los artículos [Performance, code density and operating states](https://developer.arm.com/documentation/dvi0027/b/arm7tdmi/performance--code-density-and-operating-states) y [The Thumb instruction set](https://developer.arm.com/documentation/ddi0210/c/CACBCAAE), las instrucciones Thumb son un subconjunto de las instrucciones ARM permitiendo la misma funcionalidad pero son almacenadas en un código de 16 bits en lugar de 32 bits, por lo que se dice que son más densas. Su ejecución y tratamiento es transparente en tiempo de ejecución, puesto que estas instrucciones son descomprimidas a instrucciones ARM completas de 32 bits sin pérdida de rendimiento.
+
+
 3. ¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este
 tipo de arquitectura?
 4. ¿Cómo es el mapa de memoria de la familia?
