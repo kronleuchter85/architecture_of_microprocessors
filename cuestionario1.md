@@ -4,6 +4,7 @@
 1. Describa brevemente las diferencias entre las familias de procesadores Cortex M0, M3 y
 M4.
 
+> 
 > Respuesta:
 > 
 > El Cortex-M3 y el Cortex-M4 son núcleos muy similares. Cada uno ofrece un rendimiento de 1,25 DMIPS/MHz con un Pipeline de 3 etapas, múltiples buses de 32 bits, velocidades de reloj de hasta 200 MHz y opciones de depuración muy eficientes. La diferencia significativa es la capacidad del núcleo Cortex-M4 para DSP. El Cortex-M3 y el Cortex-M4 comparten la
@@ -17,12 +18,31 @@ misma arquitectura y conjunto de instrucciones Thumb-2. Sin embargo, el Cortex-M
 2. ¿Por qué se dice que el set de instrucciones Thumb permite mayor densidad de código?
 Explique
 
+> 
+> Respuesta:
+> 
 > Entendiendo la densidad de código como la cantidad de funcionalidad posible por tamaño de instrucción, y basándose en los artículos [Performance, code density and operating states](https://developer.arm.com/documentation/dvi0027/b/arm7tdmi/performance--code-density-and-operating-states) y [The Thumb instruction set](https://developer.arm.com/documentation/ddi0210/c/CACBCAAE), las instrucciones Thumb son un subconjunto de las instrucciones ARM permitiendo la misma funcionalidad pero son almacenadas en un código de 16 bits en lugar de 32 bits, por lo que se dice que son más densas. Su ejecución y tratamiento es transparente en tiempo de ejecución, puesto que estas instrucciones son descomprimidas a instrucciones ARM completas de 32 bits sin pérdida de rendimiento.
-
+> 
+> 
 
 3. ¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este
 tipo de arquitectura?
+
+> 
+> Respuesta:
+> 
+> Segun la definicion de [Wikipedia] (https://en.wikipedia.org/wiki/Load%E2%80%93store_architecture), una arquitectura de almacenamiento de carga es una arquitectura de conjunto de instrucciones que divide las instrucciones en dos categorías: acceso a la memoria (carga y almacenamiento entre la memoria y los registros) y operaciones ALU (que solo ocurren entre registros). Por ejemplo, en un enfoque load-store, tanto los operandos como el destino de una operación ADD deben estar en registros del CPU, a diferencia de una arquitectura de [register-memory architecture] (https://en.wikipedia.org/wiki/Register-memory_architecture) (por ejemplo, una arquitectura de conjunto de instrucciones CISC como x86) en la que uno de los operandos para la operación ADD puede estar en la memoria, mientras que el otro está en un registro.
+> 
+> 
+
 4. ¿Cómo es el mapa de memoria de la familia?
+
+> 
+> Respuesta: 
+> ...
+> 
+
+
 5. ¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP?
 6. Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y
 como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo
