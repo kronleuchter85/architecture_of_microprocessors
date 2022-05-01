@@ -57,7 +57,7 @@ tipo de arquitectura?
 > - SRAM (0.5 GB)
 > - Code (0.5 GB)
 > 
-> [Diagrama](http://download.mikroe.com/documents/compilers/mikroc/arm/help/img/arm_memory_map.gif)
+> ![Diagrama](http://download.mikroe.com/documents/compilers/mikroc/arm/help/img/arm_memory_map.gif)
 > 
 > Fuentes:
 > - [ARM Cortex M4 - Memory System Details](https://bravokeyl.com/arm-cortex-m4-memory-system/) 
