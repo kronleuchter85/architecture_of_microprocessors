@@ -23,7 +23,9 @@ Explique
 > 
 > Entendiendo la densidad de código como la cantidad de funcionalidad posible por tamaño de instrucción, y basándose en los artículos [Performance, code density and operating states](https://developer.arm.com/documentation/dvi0027/b/arm7tdmi/performance--code-density-and-operating-states) y [The Thumb instruction set](https://developer.arm.com/documentation/ddi0210/c/CACBCAAE), las instrucciones Thumb son un subconjunto de las instrucciones ARM permitiendo la misma funcionalidad pero son almacenadas en un código de 16 bits en lugar de 32 bits, por lo que se dice que son más densas. Su ejecución y tratamiento es transparente en tiempo de ejecución, puesto que estas instrucciones son descomprimidas a instrucciones ARM completas de 32 bits sin pérdida de rendimiento como se puede inferir de la siguiente cita de uno de los articulos mencionados: “Thumb code is typically 65% of the size of ARM code, and provides 160% of the performance of ARM code when running from a 16-bit memory system. Thumb, therefore, makes the ARM7TDMI core ideally suited to embedded applications with restricted memory bandwidth, where code density and footprint is important.”
 > 
-> 
+> Fuentes:
+> - [Performance, code density and operating states](https://developer.arm.com/documentation/dvi0027/b/arm7tdmi/performance--code-density-and-operating-states)
+> - [The Thumb instruction set](https://developer.arm.com/documentation/ddi0210/c/CACBCAAE)
 > 
 
 3. ¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este
@@ -36,16 +38,33 @@ tipo de arquitectura?
 > La arquitectura opuesta es [register-memory architecture](https://en.wikipedia.org/wiki/Register-memory_architecture) en la que básicamente se permite que las instrucciones trabajen con valores directamente en memoria. 
 > Las arquitecturas ARM utilizan el modelo load-store mientras que las x86 register-memory.
 > 
-> 
-> 
+> Fuentes:
+> - [Wikipedia](https://en.wikipedia.org/wiki/Load%E2%80%93store_architecture)
+> - [register-memory architecture](https://en.wikipedia.org/wiki/Register-memory_architecture)
+> - [Memory Instructions: Load and Store](https://azeria-labs.com/memory-instructions-load-and-store-part-4/)
 
 4. ¿Cómo es el mapa de memoria de la familia?
 
 > 
 > Respuesta: 
-> ...
+> Para ARM Cortex M, basandome en los articulos [ARM Cortex M4 - Memory System Details](https://bravokeyl.com/arm-cortex-m4-memory-system/) y [ARM Cortex-M3 and Cortex-M4 Memory Organization](http://download.mikroe.com/documents/compilers/mikroc/arm/help/memory_organization.htm), el mapa de memoria esta dividido en:
+> - System ( 0.5 GB)
+> - Private Peripheral Bus - External
+> - Private Peripheral Bus - Internal
+> - External Device (1 GB)
+> - RAM (1 GB)
+> - Peripheral (0.5 GB)
+> - SRAM (0.5 GB)
+> - Code (0.5 GB)
 > 
-
+> [Diagrama](http://download.mikroe.com/documents/compilers/mikroc/arm/help/img/arm_memory_map.gif)
+> 
+> Fuentes:
+> - [ARM Cortex M4 - Memory System Details](https://bravokeyl.com/arm-cortex-m4-memory-system/) 
+> - [ARM Cortex-M3 and Cortex-M4 Memory Organization](http://download.mikroe.com/documents/compilers/mikroc/arm/help/memory_organization.htm)
+> - [Memory regions table](https://developer.arm.com/documentation/100166/0001/Programmers-Model/Processor-memory-model/Memory-regions-table)
+> - [System address map](https://developer.arm.com/documentation/ddi0439/b/Programmers-Model/System-address-map)
+> 
 
 5. ¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP?
 6. Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y
