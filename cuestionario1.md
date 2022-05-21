@@ -66,6 +66,14 @@ tipo de arquitectura?
 > 
 
 5. ¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP?
+
+> Primero, MSP (Main Stack Pointer) y PSP (Processor Stack Pointer) son dos registros de los Cortex M usados como stack pointers, MSP usado en Thread mode cuando el bit de CONTROL (SPSEL) esta en cero pero usado siempre en Handler Mode. PSP por otro lado usadoen Thread Mode cuando el bit de CONTROL (SPSEL) esta en 1.
+>  
+> Fuentes:
+> [Main Stack Pointer](https://www.sciencedirect.com/topics/engineering/main-stack-pointer)
+>  
+
+
 6. Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y
 como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo
 privilegiado a no priviligiado y nuevamente a privilegiado.
