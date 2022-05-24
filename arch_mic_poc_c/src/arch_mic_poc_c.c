@@ -63,13 +63,13 @@ void scalarProduct16(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size, uin
 // ej-4 - productoEscalar12
 // -------------------------------------------------------------------------------------------------------
 
-void productoEscalar12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size, uint16_t scalarNumber) {
+void scalarProduct12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size, uint16_t scalarNumber) {
 
 	while (size) {
 		vectorOut[size] = scalarNumber * vectorIn[size];
 
 		if (vectorOut[size] > 4095) {
-			vectorOut[size] = 4095
+			vectorOut[size] = 4095;
 		}
 
 		size--;
@@ -198,7 +198,52 @@ void test_exercise_3() {
 	printf("------------------------------------------------\n");
 	size = 16;
 	while (size) {
+		printf("%i-%i\n", size, vec2[size]);
+		size--;
+	}
+}
+
+void test_exercise_4() {
+
+	uint32_t size;
+
+	//
+	//
+	// inicializamos un vector
+	//
+	uint16_t vec[16];
+
+	//
+	// imprimimos los valores iniciales
+	//
+	printf("------------------------------------------------\n");
+	size = 16;
+	while (size) {
 		printf("%i-%i\n", size, vec[size]);
+		size--;
+	}
+	//
+	// ponemos los valores en un numero random
+	//
+	size = 16;
+	while (size) {
+		vec[size] = rand() % 11;
+		size--;
+	}
+
+	//
+	// multiplicamos todos los valores por 700 sabiendo que saturan cuando alcanzan 12 bits (4095)
+	//
+	uint16_t vec2[16];
+	scalarProduct12(vec, vec2, 16, 700);
+
+	//
+	// imprimimos los valores despues de cambiarlos
+	//
+	printf("------------------------------------------------\n");
+	size = 16;
+	while (size) {
+		printf("%i-%i\n", size, vec2[size]);
 		size--;
 	}
 }
@@ -212,17 +257,22 @@ int main() {
 	//
 	// ejercicio 1...
 	//
-	//test_exercise_1();
+	// test_exercise_1();
 
 	//
 	// ejercicio 2...
 	//
-	//test_exercise_2();
+	// test_exercise_2();
 
 	//
 	// ejercicio 3...
 	//
-	test_exercise_3();
+	//test_exercise_3();
+
+	//
+	// ejercicio 3...
+	//
+	test_exercise_4();
 
 	return 0;
 }
