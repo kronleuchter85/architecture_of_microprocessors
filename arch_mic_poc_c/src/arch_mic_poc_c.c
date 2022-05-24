@@ -65,6 +65,16 @@ void scalarProduct16(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size, uin
 
 void productoEscalar12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size, uint16_t scalarNumber) {
 
+	while (size) {
+		vectorOut[size] = scalarNumber * vectorIn[size];
+
+		if (vectorOut[size] > 4095) {
+			vectorOut[size] = 4095
+		}
+
+		size--;
+	}
+
 }
 
 // -------------------------------------------------------------------------------------------------------
