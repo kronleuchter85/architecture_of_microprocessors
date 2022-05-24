@@ -25,20 +25,13 @@
 // ej-1 - zeros
 // -------------------------------------------------------------------------------------------------------
 
-void set_val(uint32_t *vector, uint32_t size, uint32_t val) {
-
-	int i;
-	for (i = 0; i < size; i++) {
-		vector[i] = val;
-	}
-}
-
 void zeros(uint32_t *vector, uint32_t size) {
 
-	int i;
-	for (i = 0; i < size; i++) {
-		vector[i] = 0;
+	while (size) {
+		vector[size] = 0;
+		size--;
 	}
+
 }
 
 // -------------------------------------------------------------------------------------------------------
@@ -47,36 +40,59 @@ void zeros(uint32_t *vector, uint32_t size) {
 
 void scalarProduct32(uint32_t *vectorIn, uint32_t *vectorOut, uint32_t size, uint32_t scalarNumber) {
 
-	int i;
-	for (i = 0; i < size; i++) {
-		vectorOut[i] = scalarNumber * vectorIn[i];
+	while (size) {
+		vectorOut[size] = scalarNumber * vectorIn[size];
+		size--;
+	}
+
+}
+
+// -------------------------------------------------------------------------------------------------------
+// ej-3 - productoEscalar16
+// -------------------------------------------------------------------------------------------------------
+
+void scalarProduct16(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size, uint16_t scalarNumber) {
+
+	while (size) {
+		vectorOut[size] = scalarNumber * vectorIn[size];
+		size--;
 	}
 }
 
 // -------------------------------------------------------------------------------------------------------
-// ej-3
+// ej-4 - productoEscalar12
 // -------------------------------------------------------------------------------------------------------
 
-void productoEscalar16(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t longitud, uint16_t escalar) {
+void productoEscalar12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size, uint16_t scalarNumber) {
 
 }
 
 // -------------------------------------------------------------------------------------------------------
-// ej-4
+// utils
 // -------------------------------------------------------------------------------------------------------
 
-void productoEscalar12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t longitud, uint16_t escalar) {
+void set_val(uint32_t *vector, uint32_t size, uint32_t val) {
 
+	while (size) {
+		vector[size] = val;
+		size--;
+	}
 }
 
 void printVector(uint32_t *vec, uint32_t size) {
 
 	printf("------------------------------------------------\n");
-	int i;
-	for (i = 0; i < size; i++) {
-		printf("%i-%i\n", i, vec[i]);
+
+	while (size) {
+		printf("%i-%i\n", size, vec[size]);
+		size--;
 	}
+
 }
+
+// -------------------------------------------------------------------------------------------------------
+// tests
+// -------------------------------------------------------------------------------------------------------
 
 void test_exercise_1() {
 
@@ -116,7 +132,7 @@ void test_exercise_2() {
 	printVector(vec, 16);
 
 	//
-	// ponemos los valores en 1
+	// ponemos los valores en 2
 	//
 	set_val(vec, 16, 2);
 
@@ -132,17 +148,71 @@ void test_exercise_2() {
 	printVector(vec2, 16);
 }
 
+void test_exercise_3() {
+
+	uint32_t size;
+
+	//
+	//
+	// inicializamos un vector
+	//
+	uint16_t vec[16];
+
+	//
+	// imprimimos los valores iniciales
+	//
+	printf("------------------------------------------------\n");
+	size = 16;
+	while (size) {
+		printf("%i-%i\n", size, vec[size]);
+		size--;
+	}
+	//
+	// ponemos los valores en 2
+	//
+	size = 16;
+	while (size) {
+		vec[size] = 2;
+		size--;
+	}
+
+	//
+	// multiplicamos todos los valores por 2
+	//
+	uint16_t vec2[16];
+	scalarProduct16(vec, vec2, 16, 2);
+
+	//
+	// imprimimos los valores despues de cambiarlos
+	//
+	printf("------------------------------------------------\n");
+	size = 16;
+	while (size) {
+		printf("%i-%i\n", size, vec[size]);
+		size--;
+	}
+}
+
+// -------------------------------------------------------------------------------------------------------
+// main
+// -------------------------------------------------------------------------------------------------------
+
 int main() {
 
 	//
 	// ejercicio 1...
 	//
-	// test_exercise_1();
+	//test_exercise_1();
 
 	//
 	// ejercicio 2...
 	//
-	test_exercise_2();
+	//test_exercise_2();
+
+	//
+	// ejercicio 3...
+	//
+	test_exercise_3();
 
 	return 0;
 }
