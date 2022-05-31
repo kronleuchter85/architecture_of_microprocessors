@@ -189,6 +189,7 @@ int main(void) {
 	uint32_t vector4[16];
 	uint32_t vector5[16];
 	set_val(vector4, 16, 2);
+	set_val(vector5, 16, 1);
 
 	asm_scalarProduct32(vector4, vector5, 16, 2);
 
@@ -199,6 +200,7 @@ int main(void) {
 	uint16_t vector6[16];
 	uint16_t vector7[16];
 	set_val_16(vector6, 16, 2);
+	set_val_16(vector7, 16, 1);
 
 	asm_scalarProduct16(vector6, vector7, 16, 2);
 

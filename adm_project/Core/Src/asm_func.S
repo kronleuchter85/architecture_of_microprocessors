@@ -108,9 +108,26 @@
     	@		claramente pueda haber algo importante ahi y todo puede fallar..
     	mov		r4,0
     .asm_scalarProduct32_loop_1:
+    	
+    	@
+		@ Cargo en R4 el contenido de la posicion de memoria del registro R0
+		@ e incremento en 4 bytes su posicion para que apunte al siguiente
+		@ elemento del array
+		@   
     	ldr		r4,[r0],4
+    	
+    	@
+    	@ multiplico el contenido del registro R4 por el de R3 (el valor escalar) 
+    	@ y lo guardo en R3
+    	@
     	mul		r4,r3
+    	
+    	@
+    	@ Almaceno en memoria, en la posicion del registro R1 el valor de R4 e incremento 
+    	@ su direccion en 4 bytes
+    	@
     	str		r4,[r1],4
+    	
     	subs	r2, 1
     	bne		.asm_scalarProduct32_loop_1
     	bx		lr
@@ -135,9 +152,26 @@
     	@		claramente pueda haber algo importante ahi y todo puede fallar..
     	mov		r4,0
     .asm_scalarProduct16_loop_1:
+    
+    	@
+		@ Cargo en R4 el contenido de la posicion de memoria del registro R0
+		@ e incremento en 2 bytes su posicion para que apunte al siguiente
+		@ elemento del array
+		@    	
     	ldr		r4,[r0],2
+    	
+    	@
+    	@ multiplico el contenido del registro R4 por el de R3 (el valor escalar) 
+    	@ y lo guardo en R3
+    	@
     	mul		r4,r3
+    	
+    	@
+    	@ Almaceno en memoria, en la posicion del registro R1 el valor de R4 e incremento 
+    	@ su direccion en 2 bytes
+    	@
     	str		r4,[r1],2
+    	
     	subs	r2, 1
     	bne		.asm_scalarProduct16_loop_1
     	bx		lr
