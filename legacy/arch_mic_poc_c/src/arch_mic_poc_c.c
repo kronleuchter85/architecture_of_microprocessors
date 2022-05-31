@@ -25,11 +25,11 @@
 // ej-1 - zeros
 // -------------------------------------------------------------------------------------------------------
 
-void zeros(uint32_t *vector, uint32_t size) {
+void zeros(uint32_t *vector, uint32_t length) {
 
-	while (size) {
-		vector[size] = 0;
-		size--;
+	while (length) {
+		vector[length] = 0;
+		length--;
 	}
 
 }
@@ -66,10 +66,11 @@ void scalarProduct16(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size, uin
 void scalarProduct12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size, uint16_t scalarNumber) {
 
 	while (size) {
-		vectorOut[size] = scalarNumber * vectorIn[size];
 
-		if (vectorOut[size] > 4095) {
+		if (scalarNumber * vectorIn[size] < 0) {
 			vectorOut[size] = 4095;
+		} else {
+			vectorOut[size] = scalarNumber * vectorIn[size];
 		}
 
 		size--;
@@ -252,28 +253,28 @@ void test_exercise_4() {
 // main
 // -------------------------------------------------------------------------------------------------------
 
-int main() {
+//int main() {
 
-	//
-	// ejercicio 1...
-	//
-	// test_exercise_1();
+//
+// ejercicio 1...
+//
+// test_exercise_1();
 
-	//
-	// ejercicio 2...
-	//
-	// test_exercise_2();
+//
+// ejercicio 2...
+//
+// test_exercise_2();
 
-	//
-	// ejercicio 3...
-	//
-	//test_exercise_3();
+//
+// ejercicio 3...
+//
+//test_exercise_3();
 
-	//
-	// ejercicio 3...
-	//
-	test_exercise_4();
+//
+// ejercicio 3...
+//
+// test_exercise_4();
 
-	return 0;
-}
+//	return 0;
+//}
 
