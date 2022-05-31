@@ -7,6 +7,7 @@
 .global asm_sum
 .global asm_zeros
 .global asm_copy_vector
+.global asm_scalarProduct32
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
@@ -85,5 +86,31 @@
     	str		r3,[r1],4
     	subs	r2, 1
     	bne		.asm_copy_loop
+    	bx		lr
+    	
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   void asm_scalarProduct32(uint32_t *vectorIn, uint32_t *vectorOut, uint32_t length, uint32_t scalarNumber);
+@
+@ Parametros recibidos:
+@   r0: *vectorIn
+@   r1: *vectorOut
+@   r2: length
+@	r3:	scalarNumber
+@
+.thumb_func
+    asm_scalarProduct32:
+    	@ Registros usados
+    	@	r4: inicializo en cero - estoy asumiendo que el R4 es un registro de proposito general
+    	@		claramente pueda haber algo importante ahi y todo puede fallar..
+    	mov		r4,0
+    .asm_scalarProduct32_loop_1:
+    	ldr		r4,[r0],4
+    	mul		r4,r3
+    	str		r4,[r1],4
+    	subs	r2, 1
+    	bne		.asm_scalarProduct32_loop_1
     	bx		lr
     	

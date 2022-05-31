@@ -12,19 +12,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-/*
- * exercises.c
- *
- *  Created on: 21 May 2022
- *      Author: gonzalo
- */
-
-#include <stdint.h>
-
 // -------------------------------------------------------------------------------------------------------
 // ej-1 - zeros
 // -------------------------------------------------------------------------------------------------------
-
 void zeros(uint32_t *vector, uint32_t length) {
 
 	while (length--) {
@@ -37,12 +27,10 @@ void zeros(uint32_t *vector, uint32_t length) {
 // ej-2 - productoEscalar32
 // -------------------------------------------------------------------------------------------------------
 
-void scalarProduct32(uint32_t *vectorIn, uint32_t *vectorOut, uint32_t size,
-		uint32_t scalarNumber) {
+void scalarProduct32(uint32_t *vectorIn, uint32_t *vectorOut, uint32_t size, uint32_t scalarNumber) {
 
-	while (size) {
+	while (size--) {
 		vectorOut[size] = scalarNumber * vectorIn[size];
-		size--;
 	}
 
 }
@@ -51,12 +39,10 @@ void scalarProduct32(uint32_t *vectorIn, uint32_t *vectorOut, uint32_t size,
 // ej-3 - productoEscalar16
 // -------------------------------------------------------------------------------------------------------
 
-void scalarProduct16(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size,
-		uint16_t scalarNumber) {
+void scalarProduct16(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size, uint16_t scalarNumber) {
 
-	while (size) {
+	while (size--) {
 		vectorOut[size] = scalarNumber * vectorIn[size];
-		size--;
 	}
 }
 
@@ -64,10 +50,9 @@ void scalarProduct16(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size,
 // ej-4 - productoEscalar12
 // -------------------------------------------------------------------------------------------------------
 
-void scalarProduct12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size,
-		uint16_t scalarNumber) {
+void scalarProduct12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size, uint16_t scalarNumber) {
 
-	while (size) {
+	while (size--) {
 
 		if (scalarNumber * vectorIn[size] < 0) {
 			vectorOut[size] = 4095;
@@ -75,7 +60,6 @@ void scalarProduct12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size,
 			vectorOut[size] = scalarNumber * vectorIn[size];
 		}
 
-		size--;
 	}
 
 }
@@ -86,9 +70,8 @@ void scalarProduct12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size,
 
 void set_val(uint32_t *vector, uint32_t size, uint32_t val) {
 
-	while (size) {
+	while (size--) {
 		vector[size] = val;
-		size--;
 	}
 }
 
@@ -96,9 +79,8 @@ void printVector(uint32_t *vec, uint32_t size) {
 
 	printf("------------------------------------------------\n");
 
-	while (size) {
+	while (size--) {
 		printf("%i-%i\n", size, vec[size]);
-		size--;
 	}
 
 }
@@ -176,17 +158,15 @@ void test_exercise_3() {
 	//
 	printf("------------------------------------------------\n");
 	size = 16;
-	while (size) {
+	while (size--) {
 		printf("%i-%i\n", size, vec[size]);
-		size--;
 	}
 	//
 	// ponemos los valores en 2
 	//
 	size = 16;
-	while (size) {
+	while (size--) {
 		vec[size] = 2;
-		size--;
 	}
 
 	//
@@ -200,9 +180,8 @@ void test_exercise_3() {
 	//
 	printf("------------------------------------------------\n");
 	size = 16;
-	while (size) {
+	while (size--) {
 		printf("%i-%i\n", size, vec2[size]);
-		size--;
 	}
 }
 
@@ -221,17 +200,15 @@ void test_exercise_4() {
 	//
 	printf("------------------------------------------------\n");
 	size = 16;
-	while (size) {
+	while (size--) {
 		printf("%i-%i\n", size, vec[size]);
-		size--;
 	}
 	//
 	// ponemos los valores en un numero random
 	//
 	size = 16;
-	while (size) {
+	while (size--) {
 		vec[size] = rand() % 11;
-		size--;
 	}
 
 	//
@@ -245,9 +222,8 @@ void test_exercise_4() {
 	//
 	printf("------------------------------------------------\n");
 	size = 16;
-	while (size) {
+	while (size--) {
 		printf("%i-%i\n", size, vec2[size]);
-		size--;
 	}
 }
 
