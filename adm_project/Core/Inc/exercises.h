@@ -51,7 +51,7 @@ void scalarProduct12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size, uin
 // -------------------------------------------------------------------------------------------------------
 
 void set_val(uint32_t *vector, uint32_t size, uint32_t val);
-
+void set_val_16(uint16_t *vector, uint32_t size, uint16_t val);
 void printVector(uint32_t *vec, uint32_t size);
 
 #endif /* INC_EXERCISES_H_ */

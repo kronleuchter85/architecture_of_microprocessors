@@ -75,6 +75,13 @@ void set_val(uint32_t *vector, uint32_t size, uint32_t val) {
 	}
 }
 
+void set_val_16(uint16_t *vector, uint32_t size, uint16_t val) {
+
+	while (size--) {
+		vector[size] = val;
+	}
+}
+
 void printVector(uint32_t *vec, uint32_t size) {
 
 	printf("------------------------------------------------\n");

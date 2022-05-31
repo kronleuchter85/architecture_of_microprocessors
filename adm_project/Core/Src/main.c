@@ -193,6 +193,16 @@ int main(void) {
 	asm_scalarProduct32(vector4, vector5, 16, 2);
 
 	//
+	// probando la funcion asm_scalarProduct16
+	//
+
+	uint16_t vector6[16];
+	uint16_t vector7[16];
+	set_val_16(vector6, 16, 2);
+
+	asm_scalarProduct16(vector6, vector7, 16, 2);
+
+	//
 	// -------------------------- END EJERCICIOS ------------------------------------
 
 	/* USER CODE END 2 */
