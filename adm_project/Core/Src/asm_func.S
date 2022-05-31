@@ -6,7 +6,7 @@
 .global asm_svc
 .global asm_sum
 .global asm_zeros
-
+.global asm_copy_vector
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
@@ -63,3 +63,27 @@
         subs r1, 1          @ --longitud
         bne .asm_zeros_loop
         bx lr
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@   void asm_copy_vector (uint32_t *vector1, uint32_t *vector2, uint32_t length);
+@
+@ Parametros recibidos:
+@   r0: *vector1
+@   r1: *vector2
+@   r2: length
+@
+.thumb_func
+    asm_copy_vector:
+    	@ Registros usados
+    	@	r3: valor cero
+    	mov		r3,0
+    .asm_copy_loop:
+    	ldr		r3,[r0],4
+    	str		r3,[r1],4
+    	subs	r2, 1
+    	bne		.asm_copy_loop
+    	bx		lr
+    	

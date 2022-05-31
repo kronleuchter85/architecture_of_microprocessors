@@ -20,6 +20,7 @@
 #include "main.h"
 #include "string.h"
 #include "asm_func.h"
+#include "exercises.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -156,16 +157,35 @@ int main(void) {
 	MX_USB_OTG_FS_PCD_Init();
 	/* USER CODE BEGIN 2 */
 	PrivilegiosSVC();
+	const uint32_t Resultado = asm_sum(5, 3);
 
-	uint32_t vector[16];
+	//
+	// ---------------------------EJERCICIOS ---------------------------------------
+	//
 
-	zeros(vector, 16);
+	//
+	// probando la funcion zeros C
+	//
+	uint32_t vector1[16];
+	zeros(vector1, 16);
 
+	//
+	// probando la funcion zeros assembler
+	//
 	uint32_t vector2[16];
-
 	asm_zeros(vector2, 16);
 
-	const uint32_t Resultado = asm_sum(5, 3);
+	//
+	// probando la funcion de copia de valores entre dos vectores en assembler (invento mio) :D
+	//
+	uint32_t vector3[16];
+	set_val(vector3, 16, 16);
+
+	asm_copy_vector(vector2, vector3, 16);
+
+	//
+	// -------------------------- END EJERCICIOS ------------------------------------
+
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -323,9 +343,9 @@ static void MX_USB_OTG_FS_PCD_Init(void) {
 	hpcd_USB_OTG_FS.Init.lpm_enable = DISABLE;
 	hpcd_USB_OTG_FS.Init.vbus_sensing_enable = ENABLE;
 	hpcd_USB_OTG_FS.Init.use_dedicated_ep1 = DISABLE;
-	if (HAL_PCD_Init(&hpcd_USB_OTG_FS) != HAL_OK) {
-		Error_Handler();
-	}
+//	if (HAL_PCD_Init(&hpcd_USB_OTG_FS) != HAL_OK) {
+//		Error_Handler();
+//	}
 	/* USER CODE BEGIN USB_OTG_FS_Init 2 */
 
 	/* USER CODE END USB_OTG_FS_Init 2 */
