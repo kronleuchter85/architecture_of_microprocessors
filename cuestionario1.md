@@ -80,12 +80,19 @@ privilegiado a no priviligiado y nuevamente a privilegiado.
 
 > 
 > Respuesta: 
-> Los modos en los que el procesador puede operar son Thread -modo normal de operacion en el que el micro inicia y al que se vuelve luego de procesar excepciones, se puede utilizar el stack principal o uno alternativo si el sistema se configura para eso- y Handler -modo en el que se utiliza el stack principal y se encuentra cuando esta procesando una excepcion-. El modo Handler es un modo privilegiado. En el modo Thread existen dos niveles de privilegio: Privilegiado -puede acceder a todos los recursos- y No-Privilegiado -el acceso se restringe a ciertos recursos necesarios para la operacion del sistema. 
+> Los modos en los que el procesador puede operar son Thread -modo normal de operacion con dos niveles de privilegios en el que el micro inicia y al que se vuelve luego de procesar excepciones, se puede utilizar el stack principal o uno alternativo si el sistema se configura para eso- y Handler -modo privilegiado en el que se utiliza el stack principal y se encuentra cuando esta procesando una excepcion-. Como se menciono antes, en el modo Thread existen dos niveles de privilegio: Privilegiado -puede acceder a todos los recursos- y No-Privilegiado -el acceso se restringe a ciertos recursos necesarios para la operacion del sistema. 
 > 
 
 7. ¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo
+> 
+> Respuesta:
+> La ortogonalidad en el modelo de registros significa que la arquitectura soporta que todos los tipos de instrucciones del procesador pueden utilizar todos los modos de direccionamiento. Por lo tanto es "ortogonal" en el sentido de que el tipo de instruccion y el modo de direccionamiento varian independientemente, no imponiendo una limitacion de requerir una determinada instruccion para utilizar un registro especifico permitiendo entonces menor superposicion de la funcionalidad entre las instrucciones.
+>  
+
 8. ¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un
 ejemplo
+
+
 9. Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).
 
 10. Describa las funciones principales de la pila. ¿Cómo resuelve la arquitectura el llamado
