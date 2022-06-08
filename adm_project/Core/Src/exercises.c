@@ -65,6 +65,36 @@ void scalarProduct12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size, uin
 }
 
 // -------------------------------------------------------------------------------------------------------
+// ej-5 - windowFilter10
+// -------------------------------------------------------------------------------------------------------
+
+void windowFilter10(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t vecInLength)
+{
+	uint32_t index = 0;
+
+	while (index < vecInLength) {
+
+		uint32_t aux;
+		uint16_t avg = 0;
+		uint32_t i;
+
+		for (i = 0; i < 10; i++) {
+
+			if (index + i >= vecInLength) {
+				aux = index + i % vecInLength;
+			} else {
+				aux = (index + i);
+			}
+			avg += vectorIn[aux];
+		}
+
+		vectorOut[index] = avg / 10;
+
+		index++;
+	}
+}
+
+// -------------------------------------------------------------------------------------------------------
 // utils
 // -------------------------------------------------------------------------------------------------------
 
@@ -258,7 +288,7 @@ int main2() {
 	//
 	// ejercicio 3...
 	//
-	test_exercise_4();
+	// test_exercise_4();
 
 	return 0;
 }
