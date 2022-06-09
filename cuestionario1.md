@@ -97,7 +97,9 @@ ejemplo
 
 10. Describa las funciones principales de la pila. ¿Cómo resuelve la arquitectura el llamado
 a funciones y su retorno?
+
 11. Describa la secuencia de reset del microprocesador.
+
 12. ¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de
 los periféricos?
 
