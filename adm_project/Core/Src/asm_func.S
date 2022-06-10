@@ -274,4 +274,19 @@
         pop 	{r4}
     	
         bx 		lr
-    	
+        
+        
+        
+        
+        
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@	EJERCICIO 5)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@ void windowFilter10(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t vecInLength)
+@
+@ Parametros recibidos:
+@   r0: * vector
+@   r1: * vector
+@	r2: vecInLength
+@

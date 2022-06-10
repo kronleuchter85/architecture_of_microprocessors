@@ -70,27 +70,26 @@ void scalarProduct12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size, uin
 
 void windowFilter10(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t vecInLength)
 {
-	uint32_t index = 0;
+	uint32_t index;
 
-	while (index < vecInLength) {
+	for (index = 0; index < vecInLength; index++) {
 
-		uint32_t aux;
+		uint32_t tmp_index;
 		uint16_t avg = 0;
-		uint32_t i;
 
+		uint32_t i;
 		for (i = 0; i < 10; i++) {
 
-			if (index + i >= vecInLength) {
-				aux = index + i % vecInLength;
+			if (index + i < vecInLength) {
+				tmp_index = (index + i);
 			} else {
-				aux = (index + i);
+				tmp_index = index + i % vecInLength;
 			}
-			avg += vectorIn[aux];
+			avg += vectorIn[tmp_index];
 		}
 
 		vectorOut[index] = avg / 10;
 
-		index++;
 	}
 }
 
