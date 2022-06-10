@@ -140,7 +140,7 @@ void test_copy_vectors() {
 
 }
 
-void test_ejercicio_1() {
+void test_ejercicio_asm_1() {
 
 	//
 	// C
@@ -156,7 +156,7 @@ void test_ejercicio_1() {
 
 }
 
-void test_ejercicio_2() {
+void test_ejercicio_asm_2() {
 	//
 	// Assembler (el C fue testeado localmente)
 	//
@@ -169,7 +169,7 @@ void test_ejercicio_2() {
 
 }
 
-void test_ejercicio_3() {
+void test_ejercicio_asm_3() {
 
 	//
 	// Assembler (C testeado localmente)
@@ -183,7 +183,7 @@ void test_ejercicio_3() {
 
 }
 
-void test_ejercicio_4() {
+void test_ejercicio_asm_4() {
 
 	//
 	// Assembler (C testeado localmente)
@@ -199,7 +199,7 @@ void test_ejercicio_4() {
 	asm_scalarProduct12(vectorIn, vectorOut, 16, 400);
 }
 
-void test_exercise_5() {
+void test_exercise_asm_5() {
 
 	uint16_t vectorIn[16] = {
 			200, 150, 100, 20
@@ -212,6 +212,16 @@ void test_exercise_5() {
 
 	uint16_t vectorOut2[16];
 	asm_windowFilter10(vectorIn, vectorOut2, 16);
+}
+
+void test_exercise_asm6() {
+
+	uint32_t vectorIn[8] = {
+			312313123, 12348598, 7823182123, 734782424
+			, 312323123, 1148538, 78829123, 34724234 };
+
+	uint16_t vectorOut[8];
+
 }
 
 /**
@@ -256,30 +266,30 @@ int main(void) {
 	// EJERCICIO 1 -----------------------------------------------------------------
 	//
 
-	test_ejercicio_1();
+	test_ejercicio_asm_1();
 
 	//
 	// EJERCICIO 2 -----------------------------------------------------------------
 	//
 
-	test_ejercicio_2();
+	test_ejercicio_asm_2();
 
 	//
 	// EJERCICIO 3 -----------------------------------------------------------------
 	//
 
-	test_ejercicio_3();
+	test_ejercicio_asm_3();
 
 	//
 	// EJERCICIO 4 -----------------------------------------------------------------
 	//
 
-	test_ejercicio_4();
+	test_ejercicio_asm_4();
 
 	//
 	// EJERCICIO 5 -----------------------------------------------------------------
 	//
-	test_exercise_5();
+	test_exercise_asm_5();
 
 	//
 	// -------------------------- END EJERCICIOS ------------------------------------
