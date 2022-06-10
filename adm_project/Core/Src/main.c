@@ -125,6 +125,80 @@ static void PrivilegiosSVC(void) {
 }
 /* USER CODE END 0 */
 
+void test_copy_vectors() {
+	//
+	// test -----------------------------------------------------------------
+	//
+
+	//
+	// probando la funcion de copia de valores entre dos vectores en assembler (invento mio) :D
+	//
+	uint32_t vector3[16];
+	uint32_t vector2[16];
+	set_val(vector3, 16, 16);
+	asm_copy_vector(vector2, vector3, 16);
+
+}
+
+void test_ejercicio_1() {
+
+	//
+	// C
+	//
+	uint32_t vector1[16];
+	zeros(vector1, 16);
+
+	//
+	// Assembler
+	//
+	uint32_t vector2[16];
+	asm_zeros(vector2, 16);
+
+}
+
+void test_ejercicio_2() {
+	//
+	// Assembler (el C fue testeado localmente)
+	//
+
+	uint32_t vector4[16];
+	uint32_t vector5[16];
+	set_val(vector4, 16, 2);
+	set_val(vector5, 16, 1);
+	asm_scalarProduct32(vector4, vector5, 16, 2);
+
+}
+
+void test_ejercicio_3() {
+
+	//
+	// Assembler (C testeado localmente)
+	//
+
+	uint16_t vector6[16];
+	uint16_t vector7[16];
+	set_val_16(vector6, 16, 2);
+	set_val_16(vector7, 16, 1);
+	asm_scalarProduct16(vector6, vector7, 16, 2);
+
+}
+
+void test_ejercicio_4() {
+
+	//
+	// Assembler (C testeado localmente)
+	//
+
+	uint16_t vectorIn[16] = {
+			200, 150, 100, 20
+			, 35, 300, 250, 450
+			, 35, 300, 250, 450
+			, 35, 300, 250, 450 };
+
+	uint16_t vectorOut[16];
+	asm_scalarProduct12(vectorIn, vectorOut, 16, 400);
+}
+
 /**
  * @brief  The application entry point.
  * @retval int
@@ -164,47 +238,28 @@ int main(void) {
 	//
 
 	//
-	// probando la funcion zeros C
-	//
-	uint32_t vector1[16];
-	zeros(vector1, 16);
-
-	//
-	// probando la funcion zeros assembler
-	//
-	uint32_t vector2[16];
-	asm_zeros(vector2, 16);
-
-	//
-	// probando la funcion de copia de valores entre dos vectores en assembler (invento mio) :D
-	//
-	uint32_t vector3[16];
-	set_val(vector3, 16, 16);
-	asm_copy_vector(vector2, vector3, 16);
-
-	//
-	// probando la funcion asm_scalarProduct32
+	// EJERCICIO 1 -----------------------------------------------------------------
 	//
 
-	uint32_t vector4[16];
-	uint32_t vector5[16];
-	set_val(vector4, 16, 2);
-	set_val(vector5, 16, 1);
-	asm_scalarProduct32(vector4, vector5, 16, 2);
+	test_ejercicio_1();
 
 	//
-	// probando la funcion asm_scalarProduct16
+	// EJERCICIO 2 -----------------------------------------------------------------
 	//
 
-	uint16_t vector6[16];
-	uint16_t vector7[16];
-	set_val_16(vector6, 16, 2);
-	set_val_16(vector7, 16, 1);
-	asm_scalarProduct16(vector6, vector7, 16, 2);
+	test_ejercicio_2();
 
 	//
-	// probando windowFilter10
+	// EJERCICIO 3 -----------------------------------------------------------------
 	//
+
+	test_ejercicio_3();
+
+	//
+	// EJERCICIO 4 -----------------------------------------------------------------
+	//
+
+	test_ejercicio_4();
 
 	//
 	// -------------------------- END EJERCICIOS ------------------------------------

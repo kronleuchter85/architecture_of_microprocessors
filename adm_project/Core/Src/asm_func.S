@@ -9,6 +9,7 @@
 .global asm_copy_vector
 .global asm_scalarProduct32
 .global asm_scalarProduct16
+.global asm_scalarProduct12
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
@@ -48,9 +49,11 @@
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@ Prototipo en "C":
+@	EJERCICIO 1)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C": 
 @   void asm_zeros (uint32_t *vector, uint32_t longitud);
-@
+@	
 @ Parametros recibidos:
 @   r0: *vector
 @   r1: longitud
@@ -65,6 +68,7 @@
         subs r1, 1          @ --longitud
         bne .asm_zeros_loop
         bx lr
+
 
 
 
@@ -90,7 +94,8 @@
     	bx		lr
     	
 
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@	EJERCICIO 2)
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
 @   void asm_scalarProduct16(uint32_t *vectorIn, uint32_t *vectorOut, uint32_t length, uint32_t scalarNumber);
@@ -103,9 +108,16 @@
 @
 .thumb_func
     asm_scalarProduct32:
-    	@ Registros usados
+
+
+		@
+		@ pongo en el stack el valor del R4
+		@
+		push 	{r4}
+		
+		@
     	@	r4: inicializo en cero - estoy asumiendo que el R4 es un registro de proposito general
-    	@		claramente pueda haber algo importante ahi y todo puede fallar..
+    	@
     	mov		r4,0
     .asm_scalarProduct32_loop_1:
     	
@@ -130,11 +142,19 @@
     	
     	subs	r2, 1
     	bne		.asm_scalarProduct32_loop_1
+    	
+    	@
+    	@ restituyo el valor de R4
+    	@
+		pop		{r4}
+		
+		
     	bx		lr
     	
 
     	
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@	EJERCICIO 3)
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
 @   void asm_scalarProduct16(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t length, uint16_t scalarNumber);
@@ -147,9 +167,15 @@
 @
 .thumb_func
     asm_scalarProduct16:
-    	@ Registros usados
+    	
+		@
+		@ pongo en el stack el valor del R4
+		@
+		push 	{r4}
+    	
+    	@
     	@	r4: inicializo en cero - estoy asumiendo que el R4 es un registro de proposito general
-    	@		claramente pueda haber algo importante ahi y todo puede fallar..
+		@
     	mov		r4,0
     .asm_scalarProduct16_loop_1:
     
@@ -162,7 +188,7 @@
     	
     	@
     	@ multiplico el contenido del registro R4 por el de R3 (el valor escalar) 
-    	@ y lo guardo en R3
+    	@ y lo guardo en R4
     	@
     	mul		r4,r3
     	
@@ -173,9 +199,79 @@
     	str		r4,[r1],2
     	
     	subs	r2, 1
+    	
     	bne		.asm_scalarProduct16_loop_1
+    	
+    	@
+    	@ restituyo el valor de R4
+    	@
+		pop		{r4}
+    	
     	bx		lr
     	
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@	EJERCICIO 4)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@ void asm_scalarProduct12(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t length, uint16_t scalarNumber);
+@
+@ Parametros recibidos:
+@   r0: * vectorIn
+@   r1: * vectorOut
+@	r2: length
+@	r3: scalarNumber
+@
+@ Valor de retorno:
+@   Ninguno
+@
+.thumb_func
+    asm_scalarProduct12:
     	
+    	@
+    	@ pongo en el stack el valor de r4 
+    	@
+    	push 	{r4}
+    	
+    .asm_scalarProduct12_loop:
+    
+    	@
+    	@ cargo el contenido de memoria indicado por r0 en r4 
+    	@ e incremento el valor de r0 en 2 para la siguiente iteracion
+    	@
+    	ldr 	r4, [r0], 2
+    	
+    	@
+    	@ multiplico el valor de r3 por r4 y el resultado lo almaceno en r4
+    	@
+    	mul 	r4, r3
+    	
+    	@
+    	@ saturo a 12 bits (segundo parametro) el valor de r4. el resultado lo 
+    	@ vuelvo a almacenar en R4
+    	@
+    	usat 	r4, #12, r4
+    	
+    	@
+    	@ almaceno R4 en la posicion de memoria indicada por R1, incrementando
+    	@ en 2 bytes su direccion.
+    	@
+		str 	r4, [r1], 2
+		
+		@
+		@ decremento en 1 el valor del tercer parametro length
+		@
+    	subs 	r2, 1
+    	
+    	@
+    	@ salto condicional mientras Z != 0
+    	@
+        bne	.asm_scalarProduct12_loop
+        
+        @
+        @ restituyo los valores de r5 y r6
+        @
+        pop 	{r4}
+    	
+        bx 		lr
     	
