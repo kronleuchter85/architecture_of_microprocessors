@@ -74,12 +74,12 @@ void windowFilter10(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t vecInLengt
 
 	for (index = 0; index < vecInLength; index++) {
 
-		uint32_t tmp_index;
 		uint16_t avg = 0;
 
 		uint32_t i;
 		for (i = 0; i < 10; i++) {
 
+			uint32_t tmp_index;
 			if (index + i < vecInLength) {
 				tmp_index = (index + i);
 			} else {

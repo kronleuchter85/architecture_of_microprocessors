@@ -16,3 +16,5 @@ void asm_scalarProduct16(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t size,
 //void asm_set_val(uint16_t *vector, uint32_t size, uint16_t val)
 
 void asm_scalarProduct12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t length, uint16_t scalarNumber);
+
+void asm_windowFilter10(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t vecInLength);

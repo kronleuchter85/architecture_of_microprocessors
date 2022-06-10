@@ -10,6 +10,7 @@
 .global asm_scalarProduct32
 .global asm_scalarProduct16
 .global asm_scalarProduct12
+.global asm_windowFilter10
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
@@ -283,10 +284,108 @@
 @	EJERCICIO 5)
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
-@ void windowFilter10(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t vecInLength)
+@ void asm_windowFilter10(uint16_t * vectorIn , uint16_t * vectorOut , uint32_t vecInLength)
 @
 @ Parametros recibidos:
 @   r0: * vector
 @   r1: * vector
 @	r2: vecInLength
 @
+.thumb_func
+	asm_windowFilter10:
+        push {r3}
+        push {r4}
+        push {r5}
+        push {r6}
+        push {r7}
+        push {r8}
+
+		@
+		@ incializo el index en 0
+		@
+		mov r3, 0			
+
+.asm_windowFilter10_for_1:
+		
+		@
+		@ inicializo la variable avg en 0
+		@
+		mov r4, 0			
+		
+		@
+		@ inicializo la variable i en cero
+		@
+		mov r5, 0			
+
+.asm_windowFilter10_for_2:
+		
+		@
+		@ sumo r3 (index) con r5 (i) y guardo el resultado en r6 
+		@
+		add r6, r3, r5
+		
+		@
+		@ comparo r6 con la longitud del vector vecInLength
+		@
+		cmp r6, r2
+		
+		@
+		@ si r6 es mas chico 
+		@
+		blt .asm_windowFilter10_if_index_plus_i_lt_vecInLength
+		
+		@ calculo el modulo de index + i y lo guardo en r6
+		@
+		udiv r7, r6, r2
+		mul r7, r7, r2
+		sub r6, r6, r7
+
+.asm_windowFilter10_if_index_plus_i_lt_vecInLength:
+
+		@
+		@ me desplazo al siguiente elemento del arreglo de entrada
+		@ sumando 2 bytes a su direccion de memoria y traigo el valor
+		@ guardandolo en r8
+		@
+		mov r8, 2
+		mul r6, r6, r8
+		add r6, r0, r6
+		ldrh r8, [r6]
+		
+		@
+		@ incremento el valor del promedio acumulado con el valor del vectorIn buscado
+		@ 
+		add r4, r4, r8
+		
+		@
+		@ incremento y analisis del for (i++ && (i<10))
+		@
+		add r5, 1
+		cmp r5, 10
+		blt .asm_windowFilter10_for_2
+
+		@
+		@ termino el for, calculo el promedio en r8 y lo almaceno en vectorout
+		@
+		mov r8, 10
+		udiv r8, r4, r8
+		strh r8, [r1], 2
+
+		@
+		@ incremento index y analisis del for (index++ && (iindex < vecInLength))
+		@
+		add r3, 1
+		cmp r3, r2
+		blt .asm_windowFilter10_for_1
+
+		@
+		@ saco todo de la pila y restituyo los valores de los registros
+		@
+		pop {r8}
+        pop {r7}
+		pop {r6}
+        pop {r5}
+        pop {r4}
+        pop {r3}
+        
+		bx lr

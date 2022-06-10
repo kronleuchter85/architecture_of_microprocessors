@@ -199,6 +199,21 @@ void test_ejercicio_4() {
 	asm_scalarProduct12(vectorIn, vectorOut, 16, 400);
 }
 
+void test_exercise_5() {
+
+	uint16_t vectorIn[16] = {
+			200, 150, 100, 20
+			, 35, 300, 250, 450
+			, 35, 300, 250, 450
+			, 35, 300, 250, 450 };
+
+	uint16_t vectorOut[16];
+	windowFilter10(vectorIn, vectorOut, 16);
+
+	uint16_t vectorOut2[16];
+	asm_windowFilter10(vectorIn, vectorOut2, 16);
+}
+
 /**
  * @brief  The application entry point.
  * @retval int
@@ -260,6 +275,11 @@ int main(void) {
 	//
 
 	test_ejercicio_4();
+
+	//
+	// EJERCICIO 5 -----------------------------------------------------------------
+	//
+	test_exercise_5();
 
 	//
 	// -------------------------- END EJERCICIOS ------------------------------------
