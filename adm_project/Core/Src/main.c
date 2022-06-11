@@ -214,13 +214,19 @@ void test_exercise_asm_5() {
 	asm_windowFilter10(vectorIn, vectorOut2, 16);
 }
 
-void test_exercise_asm6() {
+void test_exercise_asm_6() {
 
 	uint32_t vectorIn[8] = {
 			312313123, 12348598, 7823182123, 734782424
 			, 312323123, 1148538, 78829123, 34724234 };
 
 	uint16_t vectorOut[8];
+
+	pack32_to_16(vectorIn, vectorOut, 16);
+
+	uint16_t vectorOut2[8];
+
+//	asm_pack32_to_16(vectorIn, vectorOut2, 16);
 
 }
 
@@ -290,6 +296,11 @@ int main(void) {
 	// EJERCICIO 5 -----------------------------------------------------------------
 	//
 	test_exercise_asm_5();
+
+	//
+	// EJERCICIO 5 -----------------------------------------------------------------
+	//
+	test_exercise_asm_6();
 
 	//
 	// -------------------------- END EJERCICIOS ------------------------------------

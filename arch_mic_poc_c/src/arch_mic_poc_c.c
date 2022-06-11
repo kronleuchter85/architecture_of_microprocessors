@@ -108,7 +108,7 @@ void windowFilter10(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t vecInLengt
 }
 
 // -------------------------------------------------------------------------------------------------------
-// ej-5 - windowFilter10
+// ej-6 - windowFilter10
 // -------------------------------------------------------------------------------------------------------
 
 void pack32_to_16(int32_t *vectorIn, int16_t *vectorOut, uint32_t length) {
@@ -122,6 +122,24 @@ void pack32_to_16(int32_t *vectorIn, int16_t *vectorOut, uint32_t length) {
 		int16_t packedOne = (int16_t) transformed;
 		vectorOut[i] = packedOne;
 	}
+}
+
+// -------------------------------------------------------------------------------------------------------
+// ej-7 - get_max
+// -------------------------------------------------------------------------------------------------------
+
+int32_t get_max(int32_t *vectorIn, uint32_t length) {
+
+	int32_t index_max = 0;
+
+	uint32_t index;
+	for (index = 0; index < length; index++) {
+		if (vectorIn[index] > vectorIn[index_max]) {
+			index_max = index;
+		}
+	}
+
+	return index_max;
 }
 
 // -------------------------------------------------------------------------------------------------------
@@ -318,6 +336,14 @@ void test_exercise_6() {
 
 	pack32_to_16(vectorIn, vectorOut, 8);
 }
+void test_exercise_7() {
+
+	int32_t vectorIn[8] = {
+			-4234, -234, -434, 42
+			, -988, 34, -6546, -345 };
+
+	uint32_t max_index = get_max(vectorIn, 8);
+}
 
 // -------------------------------------------------------------------------------------------------------
 // main
@@ -352,7 +378,12 @@ int main() {
 	//
 	// ejercicio 6
 	//
-	test_exercise_6();
+	// test_exercise_6();
+
+	//
+	// ejercicio 7
+	//
+	test_exercise_7();
 
 	return 0;
 }
