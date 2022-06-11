@@ -11,6 +11,7 @@
 .global asm_scalarProduct16
 .global asm_scalarProduct12
 .global asm_windowFilter10
+.global asm_get_max
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
@@ -391,7 +392,99 @@
 		bx lr
 		
 
+        
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@	EJERCICIO 7)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@ int32_t asm_get_max(uint32_t *vectorIn, int32_t length);
+@
+@ Parametros recibidos:
+@   r0: * vectorIn
+@   r1: length
+@ Returns:
+@	r0: indice del maximo
+@
+.thumb_func
+	asm_get_max:
+	
+		push {r4}
+		push {r5}
+		
+		@
+		@ voy a almacenar el valor del maximo encontrado en un registro (R2) en lugar
+		@ de buscarlo del array como en la implementacion en C
+		@
+		mov r2, 0					
+		
+		@
+		@ indice del maximo encontrado (R3)
+		@
+		mov r3, 0
+		
+		@
+		@ me guardo la longitud inicial del array
+		@
+		mov r5, r1							
+		
+	asm_get_max_InitLoop:
+	    
+	    ldr r4, [r0], 4						
 
+		@
+		@ comparo el elemento actual del arreglo (indexado desde el final) con 
+		@ el maximo actual guardado en R2 
+		@		
+		cmp r4,r2
+		bgt asm_get_max_UpdateGreater		
 
+	asm_get_max_AfterUpdatingGreater:
+		
+		@
+		@ me muevo al siguiente elemento del arreglo (desde el final)
+		@
+		subs r1,1						
+		
+		@
+		@ si llegue al comienzo del arreglo termino la iteracion
+		@
+		cmp r1,0							
+		beq asm_get_max_End			
+
+		@
+		@ de lo contrario vuelvo al comienzo del loop
+		@		
+		b asm_get_max_InitLoop
+	
+	asm_get_max_UpdateGreater:
+		
+		@
+		@ actualizo el maximo valor encontrado
+		@
+		mov r2, r4
+		
+		@
+		@ y el de su indice
+		@
+		mov	r3, r1
+		b asm_get_max_AfterUpdatingGreater
+		
+	asm_get_max_End:
+	
+		@
+		@ como empece a recorrerlo desde el final me interesa
+		@ restarlo para devolver el indice desde el elemento 0
+		@
+	    sub r5,r3
+	    
+	    @
+	    @ devuelvo el indice del maximo 
+	    @
+		mov r0, r5
+		
+		pop {r5}
+		pop {r4}
+		
+	    bx lr
 
 

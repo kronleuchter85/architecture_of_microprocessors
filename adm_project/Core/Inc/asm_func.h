@@ -20,3 +20,5 @@ void asm_scalarProduct12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t lengt
 void asm_windowFilter10(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t vecInLength);
 
 void asm_pack32_to_16(int32_t *vectorIn, int16_t *vectorOut, uint32_t length);
+
+int32_t asm_get_max(uint32_t *vectorIn, int32_t length);
