@@ -116,17 +116,32 @@ portabilidad de los sistemas operativos embebidos?
 
 18. ¿Qué funciones cumple la unidad de protección de memoria (MPU)?
 
+> 
+> Respuesta:
+> 
 > MPU es una versión reducida de la unidad de administración de memoria (MMU) que solo brinda soporte de protección de memoria. Se implementa en procesadores de baja potencia que solo requieren protección de memoria y no necesitan la función completa de una unidad de administración de memoria como la administración de memoria virtual. 
-> La MPU permite que el software privilegiado defina regiones de memoria y les asigne permisos de acceso y atributos (el numero de regiones varia dependiendo del procesador), para luego monitorear las transacciones, incluida la obtención de instrucciones y el acceso a datos desde el procesador, lanzando una excepción de falla cuando se detecta una infracción de acceso. Por lo tanto, el objetivo principal de la protección de la memoria es evitar que un proceso acceda a la memoria que no se le ha asignado. Esto evita que un error o malware dentro de un proceso afecte a otros procesos o al propio sistema operativo.
-
-
+> La MPU permite que el software privilegiado defina regiones de memoria y les asigne permisos de acceso y atributos, para luego monitorear las transacciones, incluida la obtención de instrucciones y el acceso a datos desde el procesador, lanzando una excepción de falla cuando se detecta una infracción de acceso. Por lo tanto, el objetivo principal de la protección de la memoria es evitar que un proceso acceda a la memoria que no se le ha asignado. Esto evita que un error o malware dentro de un proceso afecte a otros procesos o al propio sistema operativo.
+> 
+> Fuentes:
+> - [About the MPU](https://developer.arm.com/documentation/ddi0363/e/memory-protection-unit/about-the-mpu)
+> - [Unidad de Proteccion de Memoria](https://hmong.es/wiki/Memory_protection_unit)
 
 19. ¿Cuántas regiones pueden configurarse como máximo? ¿Qué ocurre en caso de haber
 solapamientos de las regiones? ¿Qué ocurre con las zonas de memoria no cubiertas por las
 regiones definidas?
 
+> 
+> Respuesta:
+> 
+> El numero de regiones depende del procesador, por ejemplo en procesadores ARMv8-M admite hasta 16 regiones. Sobre los solapamientos, puede haber dos o mas regiones solapadas con permisos y atributos de ambas regiones, para lo cual se aplica un esquema de prioridad fija para deter.minar los atributos y permisos que debe considerarse para esa zona de solapamiento. Los atributos y permisos para la region 11 tiene mayor prioridad  mientras que para la region 0 la menor prioridad. Finalmente, si se intenta acceder a una zona no cubierta o definida como parte de una region el procesador aborta el acceso. Todo acceso a una zona no mapeada en el MPU hace que produce  una 'background' fault.
+> 
+> Fuentes: 
+> - [Overlaping Regions](https://developer.arm.com/documentation/ddi0363/e/memory-protection-unit/about-the-mpu/overlapping-regions)
+> - [Background Regions](https://developer.arm.com/documentation/ddi0363/e/memory-protection-unit/about-the-mpu/background-regions)
+
 20. ¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto
 de las excepciones? Dé un ejemplo
+
 21. ¿Para qué se suele utilizar la excepción SVC? Expliquelo dentro de un marco de un
 sistema operativo embebido.
 
