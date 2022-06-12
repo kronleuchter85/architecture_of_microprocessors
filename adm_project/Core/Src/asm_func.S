@@ -7,6 +7,7 @@
 .global asm_sum
 .global asm_zeros
 .global asm_copy_vector
+.global asm_iterate
 .global asm_scalarProduct32
 .global asm_scalarProduct16
 .global asm_scalarProduct12
@@ -65,10 +66,10 @@
         @ Registros usados
         @   r2: valor cero
         mov r2, 0           @ constante cero
-    .asm_zeros_loop:
+    asm_zeros_loop:
         str r2, [r0], 4     @ sizeof(uint32_t) == 4, *vector++ = r2
         subs r1, 1          @ --longitud
-        bne .asm_zeros_loop
+        bne asm_zeros_loop
         bx lr
 
 
@@ -88,13 +89,16 @@
     	@ Registros usados
     	@	r3: valor cero
     	mov		r3,0
-    .asm_copy_loop:
+    asm_copy_loop:
     	ldr		r3,[r0],4
     	str		r3,[r1],4
     	subs	r2, 1
-    	bne		.asm_copy_loop
+    	bne		asm_copy_loop
     	bx		lr
     	
+
+
+
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @	EJERCICIO 2)
@@ -121,7 +125,7 @@
     	@	r4: inicializo en cero - estoy asumiendo que el R4 es un registro de proposito general
     	@
     	mov		r4,0
-    .asm_scalarProduct32_loop_1:
+    asm_scalarProduct32_loop_1:
     	
     	@
 		@ Cargo en R4 el contenido de la posicion de memoria del registro R0
@@ -143,7 +147,7 @@
     	str		r4,[r1],4
     	
     	subs	r2, 1
-    	bne		.asm_scalarProduct32_loop_1
+    	bne		asm_scalarProduct32_loop_1
     	
     	@
     	@ restituyo el valor de R4
@@ -179,7 +183,7 @@
     	@	r4: inicializo en cero - estoy asumiendo que el R4 es un registro de proposito general
 		@
     	mov		r4,0
-    .asm_scalarProduct16_loop_1:
+    asm_scalarProduct16_loop_1:
     
     	@
 		@ Cargo en R4 el contenido de la posicion de memoria del registro R0
@@ -202,7 +206,7 @@
     	
     	subs	r2, 1
     	
-    	bne		.asm_scalarProduct16_loop_1
+    	bne		asm_scalarProduct16_loop_1
     	
     	@
     	@ restituyo el valor de R4
@@ -211,6 +215,73 @@
     	
     	bx		lr
     	
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@ 	Prueba de concepto de una iteracion desde el primer elemento manteniendo un indice
+@
+@   uint32_t asm_iterate (uint32_t *vector1, uint32_t length);
+@
+@ Parametros recibidos:
+@   r0: *vector1 - elementos
+@   r1: length - cantidad de elementos
+@
+.thumb_func
+    asm_iterate:
+
+		push	{r4}
+		push	{r5}
+		push	{r6}
+		
+		@
+		@ indice para recorrer el arreglo de principio a fin
+		@ lo inicializo en cero
+		@
+		mov		r3 , 0
+		
+		@
+		@ quiero usar R5 para guardar el tamanio del tipo de datos (4 bytes)
+		@ e ir incrementando el iterador en multiplos de este valor
+		@
+		mov		r5 , 4
+
+	asm_get_by_index_InitLoop:
+
+		@
+		@ multiplico el indice por el tamanio del tipo de datos
+		@ y lo guardo en R6
+		@
+		mul		r6, r3 , r5
+
+		@
+		@ traigo a R4 el elemento actual del arreglo conforme al indice basado en el 
+		@ numero de elemento y tamanio tipo de datos
+		@
+		ldr		r4 , [r0,r6]
+		
+		@
+		@ incremento el 1 el indice del iterador
+		@
+		add		r3 , 1
+
+		@
+		@ si llegue al final del arreglo
+		@
+		cmp		r3 , r1
+		
+		bne 	asm_get_by_index_InitLoop
+
+		pop		{r6}
+		pop		{r5}
+		pop		{r4}
+
+    	bx		lr
+    	
+
+
+
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @	EJERCICIO 4)
@@ -235,7 +306,7 @@
     	@
     	push 	{r4}
     	
-    .asm_scalarProduct12_loop:
+    asm_scalarProduct12_loop:
     
     	@
     	@ cargo el contenido de memoria indicado por r0 en r4 
@@ -268,7 +339,7 @@
     	@
     	@ salto condicional mientras Z != 0
     	@
-        bne	.asm_scalarProduct12_loop
+        bne	asm_scalarProduct12_loop
         
         @
         @ restituyo los valores de r5 y r6
@@ -276,8 +347,6 @@
         pop 	{r4}
     	
         bx 		lr
-        
-        
         
         
         
@@ -306,7 +375,7 @@
 		@
 		mov r3, 0			
 
-.asm_windowFilter10_for_1:
+	asm_windowFilter10_for_1:
 		
 		@
 		@ inicializo la variable avg en 0
@@ -318,7 +387,7 @@
 		@
 		mov r5, 0			
 
-.asm_windowFilter10_for_2:
+	asm_windowFilter10_for_2:
 		
 		@
 		@ sumo r3 (index) con r5 (i) y guardo el resultado en r6 
@@ -333,7 +402,7 @@
 		@
 		@ si r6 es mas chico 
 		@
-		blt .asm_windowFilter10_if_index_plus_i_lt_vecInLength
+		blt asm_windowFilter10_if_index_plus_i_lt_vecInLength
 		
 		@ calculo el modulo de index + i y lo guardo en r6
 		@
@@ -341,7 +410,7 @@
 		mul r7, r7, r2
 		sub r6, r6, r7
 
-.asm_windowFilter10_if_index_plus_i_lt_vecInLength:
+	asm_windowFilter10_if_index_plus_i_lt_vecInLength:
 
 		@
 		@ me desplazo al siguiente elemento del arreglo de entrada
@@ -363,7 +432,7 @@
 		@
 		add r5, 1
 		cmp r5, 10
-		blt .asm_windowFilter10_for_2
+		blt asm_windowFilter10_for_2
 
 		@
 		@ termino el for, calculo el promedio en r8 y lo almaceno en vectorout
@@ -377,7 +446,7 @@
 		@
 		add r3, 1
 		cmp r3, r2
-		blt .asm_windowFilter10_for_1
+		blt asm_windowFilter10_for_1
 
 		@
 		@ saco todo de la pila y restituyo los valores de los registros
@@ -486,5 +555,4 @@
 		pop {r4}
 		
 	    bx lr
-
 

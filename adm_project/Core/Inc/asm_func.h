@@ -22,3 +22,5 @@ void asm_windowFilter10(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t vecInL
 void asm_pack32_to_16(int32_t *vectorIn, int16_t *vectorOut, uint32_t length);
 
 int32_t asm_get_max(uint32_t *vectorIn, int32_t length);
+
+uint32_t asm_iterate(uint32_t *vector1, uint32_t length);

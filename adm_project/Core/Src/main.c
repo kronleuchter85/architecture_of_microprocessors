@@ -183,6 +183,14 @@ void test_ejercicio_asm_3() {
 
 }
 
+void test_exercise_asm_iterate() {
+
+	int32_t vectorIn[8] = { -4234, -234, -434, 42, -988, 34, -6546, -345 };
+
+	asm_iterate(vectorIn, 8);
+
+}
+
 void test_ejercicio_asm_4() {
 
 	//
@@ -232,9 +240,7 @@ void test_exercise_asm_6() {
 
 void test_exercise_asm_7() {
 
-	int32_t vectorIn[8] = {
-			-4234, -234, -434, 42
-			, -988, 34, -6546, -345 };
+	int32_t vectorIn[8] = { -4234, -234, -434, 42, -988, 34, -6546, -345 };
 
 	uint32_t max_index = get_max(vectorIn, 8);
 	uint32_t max_index_s = asm_get_max(vectorIn, 8);
@@ -296,6 +302,11 @@ int main(void) {
 	//
 
 	test_ejercicio_asm_3();
+
+	//
+	// test iterate -----------------------------------------------------------------
+	//
+	test_exercise_asm_iterate();
 
 	//
 	// EJERCICIO 4 -----------------------------------------------------------------
