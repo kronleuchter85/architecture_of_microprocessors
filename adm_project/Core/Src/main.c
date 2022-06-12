@@ -233,6 +233,7 @@ void test_exercise_asm_6() {
 	pack32_to_16(vectorIn, vectorOut, 16);
 
 	uint16_t vectorOut2[8];
+	pack32_to_16(vectorIn, vectorOut2, 16);
 
 //	asm_pack32_to_16(vectorIn, vectorOut2, 16);
 
