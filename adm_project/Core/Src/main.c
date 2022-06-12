@@ -247,6 +247,13 @@ void test_exercise_asm_7() {
 
 }
 
+void test_exercise_asm_8() {
+
+	int32_t vectorIn[8] = { -4234, -234, -434, 42, -988, 34, -6546, -345 };
+	int32_t vectorOut[6];
+	downsampleM(vectorIn, vectorOut, 8, 3);
+}
+
 /**
  * @brief  The application entry point.
  * @retval int
@@ -328,6 +335,11 @@ int main(void) {
 	// EJERCICIO 7 -----------------------------------------------------------------
 	//
 	test_exercise_asm_7();
+
+	//
+	// EJERCICIO 8 -----------------------------------------------------------------
+	//
+	test_exercise_asm_8();
 
 	//
 	// -------------------------- END EJERCICIOS ------------------------------------

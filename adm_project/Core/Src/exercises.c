@@ -94,7 +94,7 @@ void windowFilter10(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t vecInLengt
 }
 
 // -------------------------------------------------------------------------------------------------------
-// ej-6 - windowFilter10
+// ej-6 - pack32_to_16
 // -------------------------------------------------------------------------------------------------------
 
 void pack32_to_16(int32_t *vectorIn, int16_t *vectorOut, uint32_t length) {
@@ -111,7 +111,7 @@ void pack32_to_16(int32_t *vectorIn, int16_t *vectorOut, uint32_t length) {
 }
 
 // -------------------------------------------------------------------------------------------------------
-// ej-7 - windowFilter10
+// ej-7 - get_max
 // -------------------------------------------------------------------------------------------------------
 
 int32_t get_max(int32_t *vectorIn, uint32_t length) {
@@ -126,6 +126,27 @@ int32_t get_max(int32_t *vectorIn, uint32_t length) {
 	}
 
 	return index_max;
+}
+
+// -------------------------------------------------------------------------------------------------------
+// ej-8 - downsampleM
+// -------------------------------------------------------------------------------------------------------
+
+void downsampleM(int32_t *vectorIn, int32_t *vectorOut, uint32_t length, uint32_t N) {
+	uint32_t i;
+	uint32_t added = 0;
+	uint32_t outIndex = 0;
+
+	for (i = 0; i < length; i++) {
+
+		if (added < N - 1) {
+			vectorOut[outIndex] = vectorIn[i];
+			outIndex++;
+			added++;
+		} else {
+			added = 0;
+		}
+	}
 }
 
 // -------------------------------------------------------------------------------------------------------

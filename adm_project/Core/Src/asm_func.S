@@ -556,3 +556,19 @@
 		
 	    bx lr
 
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@	EJERCICIO 8)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@ void downsampleM(int32_t *vectorIn, int32_t *vectorOut, uint32_t length, uint32_t N)
+@
+@ Parametros recibidos:
+@   r0: * vectorIn
+@   r1: * vectorOut
+@	r2: length del vectorIn
+@	r3:	cantidad de elementos cada cuantos quitar
+@ Returns:
+@	r0: indice del maximo
+@

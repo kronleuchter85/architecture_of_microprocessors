@@ -149,6 +149,20 @@ int32_t get_max(int32_t *vectorIn, uint32_t length) {
 void downsampleM(int32_t *vectorIn, int32_t *vectorOut, uint32_t length, uint32_t N)
 {
 
+	uint32_t i;
+	uint32_t added = 0;
+	uint32_t outIndex = 0;
+
+	for (i = 0; i < length; i++) {
+
+		if (added < N - 1) {
+			vectorOut[outIndex] = vectorIn[i];
+			outIndex++;
+			added++;
+		} else {
+			added = 0;
+		}
+	}
 }
 
 // -------------------------------------------------------------------------------------------------------
