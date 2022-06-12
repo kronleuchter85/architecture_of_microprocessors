@@ -13,6 +13,7 @@
 .global asm_scalarProduct12
 .global asm_windowFilter10
 .global asm_get_max
+.global asm_downsampleM
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
@@ -572,3 +573,116 @@
 @ Returns:
 @	r0: indice del maximo
 @
+.thumb_func
+	asm_downsampleM:
+		
+		@
+		@ voy a usar R4 para guardar la variable added
+		@
+		push	{r4}
+
+		@
+		@ voy a usar R5 para la variable outIndex
+		@
+		push	{r5}
+		
+		@
+		@ voy a usar r6 para la variable i
+		@
+		push	{r6}
+		
+		@
+		@ voy a usar r7 para indicar el siguiente elemento a buscar 
+		@ producto de multiplicar el indice i por 4 bytes
+		@
+		push	{r7}
+		
+		@
+		@ voy a usar r8 para guardar el elemento actual del arreglo que estoy evaluando
+		@
+		push	{r8}
+		
+		@
+		@ voy a usar r9 para indicar el siguiente elemento al que apuntar
+		@ en el array de salida producto de multicplicar outIndex * 4bytes
+		@
+		push	{r9}
+		
+		@
+		@ inicializo los indexadores
+		@
+		mov		r6 , 0
+		mov		r5 , 0
+		mov		r4 , 0
+		
+		@
+		@ trabajo con N-1 (como en el algoritmo en C)
+		@
+		sub		r3 , 1
+		
+	asm_downsampleM_InitLoop:
+		
+		@
+		@ calculo el siguiente elemento del arreglo
+		@ y lo cargo en r8
+		@
+		mul		r7 , r6 , 4
+		
+		@
+		@ tambien hago lo mismo con el siguiente elemento del array de salida
+		@
+		mul		r9 , r5 , 4
+		
+		@
+		@ traigo el elemento actual vectorIn[i]
+		@
+		ldr		r8 , [r0,r7]
+		
+		@
+		@ if (added < N-1)
+		@
+		cmp		r4 , r4
+		blt		asm_downsampleM_IfLessThan
+		b		asm_downsampleM_ElseIfEqualOrGreaterThan
+		
+	asm_downsampleM_IfLessThan:
+		
+		@
+		@ vectorOut[outIndex] = vectorIn[i];
+		@ outIndex++;
+		@ added++;
+		@
+		str		r8,[r1,r9]
+		adds	r5,1
+		adds	r4,1		
+		
+		b asm_downsampleM_endif
+	
+	asm_downsampleM_ElseIfEqualOrGreaterThan:
+		
+		@
+		@ added = 0;
+		@
+		mov		r4 , 0
+		
+		b asm_downsampleM_endif
+	
+	asm_downsampleM_endif:	
+		@
+		@ esta es la parte del for (i < length; i++)
+		@
+		add		r6 , 1
+		cmp		r6 , r2
+		bne		asm_downsampleM_InitLoop
+		
+		pop		{r9}
+		pop		{r8}
+		pop		{r7}
+		pop		{r6}
+		pop		{r5}
+		pop		{r4}
+		
+		bx 		lr
+		
+		
+		
