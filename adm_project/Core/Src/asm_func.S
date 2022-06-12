@@ -775,9 +775,9 @@
 		@ restituyo los registros sacando los valores del stack
 		@		
 		pop 	{r9}
+		pop		{r8}
 		pop		{r7}
 		pop 	{r6}
-		pop		{r8}
 		pop 	{r5}
 		pop 	{r4}
 		
