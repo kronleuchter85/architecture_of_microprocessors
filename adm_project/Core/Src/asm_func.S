@@ -725,8 +725,6 @@
 		@ - R9: para indicar la siguiente posicion en el arreglo desde el final	
 		@
 		
-		push 	{r2}
-		push 	{r3}
 		push 	{r4}
 		push 	{r5}
 		push 	{r6}
@@ -756,14 +754,14 @@
 		@
 		mul		r8 , r5 , r7				@ R8 = i * 2 bytes
 		mul		r9 , r2 , r7				@ R9 = x * 2 bytes
-		ldr		r4 , [r0,r8]				@ tmp_i = vectorIn[i]
-		ldr		r3 , [r0,r9]				@ tmp_x = vectorIn[x]
+		ldrh	r4 , [r0,r8]				@ tmp_i = vectorIn[i]
+		ldrh	r3 , [r0,r9]				@ tmp_x = vectorIn[x]
 		
 		@
 		@ almaceno los valores actualizados
 		@
-		str		r3 , [r0,r8]				@ vector[i] = tmp_x
-		str		r4 , [r0,r9]				@ vector[x] = tmp_i
+		strh	r3 , [r0,r8]				@ vector[i] = tmp_x
+		strh	r4 , [r0,r9]				@ vector[x] = tmp_i
 		
 		@
 		@ incremento el indexador i
@@ -782,8 +780,6 @@
 		pop		{r8}
 		pop 	{r5}
 		pop 	{r4}
-		pop 	{r3}
-		pop 	{r2}
 		
-		
+		bx 		lr
 		
