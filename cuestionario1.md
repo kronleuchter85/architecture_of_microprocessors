@@ -24,8 +24,8 @@ Explique
 > Entendiendo la densidad de código como la cantidad de funcionalidad posible por tamaño de instrucción, y basándose en los artículos [Performance, code density and operating states](https://developer.arm.com/documentation/dvi0027/b/arm7tdmi/performance--code-density-and-operating-states) y [The Thumb instruction set](https://developer.arm.com/documentation/ddi0210/c/CACBCAAE), las instrucciones Thumb son un subconjunto de las instrucciones ARM permitiendo la misma funcionalidad pero son almacenadas en un código de 16 bits en lugar de 32 bits, por lo que se dice que son más densas. Su ejecución y tratamiento es transparente en tiempo de ejecución, puesto que estas instrucciones son descomprimidas a instrucciones ARM completas de 32 bits sin pérdida de rendimiento como se puede inferir de la siguiente cita de uno de los articulos mencionados: “Thumb code is typically 65% of the size of ARM code, and provides 160% of the performance of ARM code when running from a 16-bit memory system. Thumb, therefore, makes the ARM7TDMI core ideally suited to embedded applications with restricted memory bandwidth, where code density and footprint is important.”
 > 
 > Fuentes:
-> - [Performance, code density and operating states](https://developer.arm.com/documentation/dvi0027/b/arm7tdmi/performance--code-density-and-operating-states)
-> - [The Thumb instruction set](https://developer.arm.com/documentation/ddi0210/c/CACBCAAE)
+> - [arm Developer - Performance, code density and operating states](https://developer.arm.com/documentation/dvi0027/b/arm7tdmi/performance--code-density-and-operating-states)
+> - [arm Developer - The Thumb instruction set](https://developer.arm.com/documentation/ddi0210/c/CACBCAAE)
 > 
 
 3. ¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este
@@ -61,8 +61,8 @@ tipo de arquitectura?
 > Fuentes:
 > - [ARM Cortex M4 - Memory System Details](https://bravokeyl.com/arm-cortex-m4-memory-system/) 
 > - [ARM Cortex-M3 and Cortex-M4 Memory Organization](http://download.mikroe.com/documents/compilers/mikroc/arm/help/memory_organization.htm)
-> - [Memory regions table](https://developer.arm.com/documentation/100166/0001/Programmers-Model/Processor-memory-model/Memory-regions-table)
-> - [System address map](https://developer.arm.com/documentation/ddi0439/b/Programmers-Model/System-address-map)
+> - [arm Developer - Memory regions table](https://developer.arm.com/documentation/100166/0001/Programmers-Model/Processor-memory-model/Memory-regions-table)
+> - [arm Developer - System address map](https://developer.arm.com/documentation/ddi0439/b/Programmers-Model/System-address-map)
 > 
 
 5. ¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP?
@@ -102,17 +102,70 @@ a funciones y su retorno?
 
 12. ¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de
 los periféricos?
-
+> 
+> Respuesta:
+> 
+> 
+> Fuentes:
+> - []()
+> - []()
+> 
 13. ¿Cómo se implementan las prioridades de las interrupciones? Dé un ejemplo
+> 
+> Respuesta:
+> 
+> 
+> Fuentes:
+> - []()
+> - []()
+> 
 14. ¿Qué es el CMSIS? ¿Qué función cumple? ¿Quién lo provee? ¿Qué ventajas aporta?
+> 
+> Respuesta:
+> 
+> El Cortex Microcontroller Software Interface Standard (CMSIS) proporciona un framework para el desarrollo de sistemas embebidos basados ​​en Cortex-M y Cortex-A5/A7/A9. Se inició en 2008 en cooperación con varios proveedores de software y silicio. CMSIS permite interfaces de software uniformes y sencillas para el procesador y los periféricos, lo que simplifica la reutilización del software y reduce la curva de aprendizaje para los desarrolladores de sistemas embebidos.
+> 
+> Consta de varios componentes internos, que solo para mencionar algunos de sus modulos:
+> - CMSIS-RTOS
+> - CMSIS-NN
+> - CMSIS-DSP
+> - CMSIS-Driver
+> - CMSIS-CORE
+> - CMSIS-SVD
+> - CMSIS-DAP
+> - CMSIS-Zone
+> 
+> Dentro de las ventajas se pueden mencionar: 
+> - que al ser un conjunto de componentes, herramientas, APIs, etc, ayuda a reducir la curva de aprendizaje, los costos de desarrollo, y el time-to-market
+> - los componentes utilizan interfaces consistentes por lo cual se mejora la portabilidad
+> - brinda interfaces y herramientas de debug estandarizadas y probadas
+> - existe una gran comunidad utilizandolo, con lo cual es facil encontrar documentacion y referencias
+> 
+> Fuentes:
+> - [CMSIS](https://www2.keil.com/mdk5/cmsis)
+> - []()
+> 
+
+
 15. Cuando ocurre una interrupción, asumiendo que está habilitada ¿Cómo opera el
 microprocesador para atender a la subrutina correspondiente? Explique con un ejemplo
 
-17. ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante?
+> 
+> Respuesta:
+> 
+> 
+> Fuentes:
+> - [arm Developer - Handling Interrupts](https://developer.arm.com/documentation/198123/0302/Handling-interrupts?lang=en)
+> - [A Practical guide to ARM Cortex-M Exception Handling](https://interrupt.memfault.com/blog/arm-cortex-m-exceptions-and-nvic)
+
+
 16. Explique las características avanzadas de atención a interrupciones: tail chaining y late
 arrival.
+
 17. ¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la
 portabilidad de los sistemas operativos embebidos?
+
+17. ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante?
 
 18. ¿Qué funciones cumple la unidad de protección de memoria (MPU)?
 
@@ -123,7 +176,7 @@ portabilidad de los sistemas operativos embebidos?
 > La MPU permite que el software privilegiado defina regiones de memoria y les asigne permisos de acceso y atributos, para luego monitorear las transacciones, incluida la obtención de instrucciones y el acceso a datos desde el procesador, lanzando una excepción de falla cuando se detecta una infracción de acceso. Por lo tanto, el objetivo principal de la protección de la memoria es evitar que un proceso acceda a la memoria que no se le ha asignado. Esto evita que un error o malware dentro de un proceso afecte a otros procesos o al propio sistema operativo.
 > 
 > Fuentes:
-> - [About the MPU](https://developer.arm.com/documentation/ddi0363/e/memory-protection-unit/about-the-mpu)
+> - [arm Developer - About the MPU](https://developer.arm.com/documentation/ddi0363/e/memory-protection-unit/about-the-mpu)
 > - [Unidad de Proteccion de Memoria](https://hmong.es/wiki/Memory_protection_unit)
 
 19. ¿Cuántas regiones pueden configurarse como máximo? ¿Qué ocurre en caso de haber
@@ -136,8 +189,8 @@ regiones definidas?
 > El numero de regiones depende del procesador, por ejemplo en procesadores ARMv8-M admite hasta 16 regiones. Sobre los solapamientos, puede haber dos o mas regiones solapadas con permisos y atributos de ambas regiones, para lo cual se aplica un esquema de prioridad fija para deter.minar los atributos y permisos que debe considerarse para esa zona de solapamiento. Los atributos y permisos para la region 11 tiene mayor prioridad  mientras que para la region 0 la menor prioridad. Finalmente, si se intenta acceder a una zona no cubierta o definida como parte de una region el procesador aborta el acceso. Todo acceso a una zona no mapeada en el MPU hace que produce  una 'background' fault.
 > 
 > Fuentes: 
-> - [Overlaping Regions](https://developer.arm.com/documentation/ddi0363/e/memory-protection-unit/about-the-mpu/overlapping-regions)
-> - [Background Regions](https://developer.arm.com/documentation/ddi0363/e/memory-protection-unit/about-the-mpu/background-regions)
+> - [arm Developer - Overlaping Regions](https://developer.arm.com/documentation/ddi0363/e/memory-protection-unit/about-the-mpu/overlapping-regions)
+> - [arm Developer - Background Regions](https://developer.arm.com/documentation/ddi0363/e/memory-protection-unit/about-the-mpu/background-regions)
 
 20. ¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto
 de las excepciones? Dé un ejemplo
