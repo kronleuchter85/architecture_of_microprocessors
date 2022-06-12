@@ -69,6 +69,8 @@ int32_t get_max(int32_t *vectorIn, uint32_t length);
 
 void downsampleM(int32_t *vectorIn, int32_t *vectorOut, uint32_t length, uint32_t N);
 
+void rotate(uint16_t *vector, uint32_t length);
+
 // -------------------------------------------------------------------------------------------------------
 // utils
 // -------------------------------------------------------------------------------------------------------

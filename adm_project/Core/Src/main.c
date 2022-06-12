@@ -257,6 +257,13 @@ void test_exercise_asm_8() {
 
 }
 
+void test_exercise_asm_invertir() {
+
+	int16_t vectorIn[8] = { 4234, 234, 434, 42, 988, 34, 6546, 345 };
+	rotate(vectorIn, 8);
+
+}
+
 /**
  * @brief  The application entry point.
  * @retval int
