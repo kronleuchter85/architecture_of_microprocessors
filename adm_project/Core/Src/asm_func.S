@@ -14,6 +14,7 @@
 .global asm_windowFilter10
 .global asm_get_max
 .global asm_downsampleM
+.global asm_rotate
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
@@ -570,8 +571,6 @@
 @   r1: * vectorOut
 @	r2: length del vectorIn
 @	r3:	cantidad de elementos cada cuantos quitar
-@ Returns:
-@	r0: indice del maximo
 @
 .thumb_func
 	asm_downsampleM:
@@ -694,6 +693,97 @@
 		pop		{r4}
 		
 		bx 		lr
+		
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@	EJERCICIO 9)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@ void rotate(uint16_t *vector, uint32_t length)
+@
+@ Parametros recibidos:
+@   r0: * vectorIn
+@	r1: length del vectorIn
+@
+
+.thumb_func
+	asm_rotate:	
+	
+		@
+		@ Registros para las variables principales del algoritmo 
+		@
+		@ - R5: i
+		@ - R2: x
+		@ - R4: vector[i]
+		@ - R3: vector[x]
+		@ - R6: boundary
+		@
+		@ Y registros para variables auxiliares por la implementacion en assembler
+		@ - R7: para constante de tipo de datos (2 bytes)
+		@ - R8: para indicar la siguiente posicion en el arreglo desde el comienzo		
+		@ - R9: para indicar la siguiente posicion en el arreglo desde el final	
+		@
+		
+		push 	{r2}
+		push 	{r3}
+		push 	{r4}
+		push 	{r5}
+		push 	{r6}
+		push	{r7}
+		push	{r8}
+		push 	{r9}
+
+		@
+		@ inicializacion de indices y constantes
+		@		
+		mov		r7 , 2						@ cte = 2 
+		mov		r5 , 0						@ i = 0
+		udiv	r6 , r1 , r7 				@ boundary = length / 2
+		mov		r2 , r1						@ x = length
+		subs	r2 , 1						@ x = x - 1
+
+	asm_rotate_Init_Loop:
+
+		@
+		@ actualizo el valor del indice x
+		@		
+		subs	r2 , r5
+
+		@
+		@ seteo los indices para localizar el primer y ultimo elemento
+		@ del array, y los accedo trayendo los valores
+		@
+		mul		r8 , r5 , r7				@ R8 = i * 2 bytes
+		mul		r9 , r2 , r7				@ R9 = x * 2 bytes
+		ldr		r4 , [r0,r8]				@ tmp_i = vectorIn[i]
+		ldr		r3 , [r0,r9]				@ tmp_x = vectorIn[x]
+		
+		@
+		@ almaceno los valores actualizados
+		@
+		str		r3 , [r0,r8]				@ vector[i] = tmp_x
+		str		r4 , [r0,r9]				@ vector[x] = tmp_i
+		
+		@
+		@ incremento el indexador i
+		@
+		adds	r5 , 1						@ i++
+		
+		cmp		r5 , r6						@ i < boundary ??
+		blt		asm_rotate_Init_Loop
+
+		@
+		@ restituyo los registros sacando los valores del stack
+		@		
+		pop 	{r9}
+		pop		{r7}
+		pop 	{r6}
+		pop		{r8}
+		pop 	{r5}
+		pop 	{r4}
+		pop 	{r3}
+		pop 	{r2}
 		
 		
 		

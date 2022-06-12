@@ -155,14 +155,18 @@ void downsampleM(int32_t *vectorIn, int32_t *vectorOut, uint32_t length, uint32_
 
 void rotate(uint16_t *vector, uint32_t length) {
 
-	uint16_t tmp;
 	uint32_t i;
+	uint32_t x;
+	uint16_t tmp_i;
+	uint16_t tmp_x;
 	uint32_t boundary = length / 2;
-	for (i = 0; i < boundary; i++) {
 
-		tmp = vector[i];
-		vector[i] = vector[length - 1 - i];
-		vector[length - 1 - i] = tmp;
+	for (i = 0; i < boundary; i++) {
+		x = length - 1 - i;
+		tmp_i = vector[i];
+		tmp_x = vector[x];
+		vector[i] = tmp_x;
+		vector[x] = tmp_i;
 	}
 }
 

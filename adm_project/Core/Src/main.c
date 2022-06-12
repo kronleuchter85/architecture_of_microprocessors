@@ -257,10 +257,13 @@ void test_exercise_asm_8() {
 
 }
 
-void test_exercise_asm_invertir() {
+void test_exercise_asm_9() {
 
 	int16_t vectorIn[8] = { 4234, 234, 434, 42, 988, 34, 6546, 345 };
 	rotate(vectorIn, 8);
+
+	int16_t vectorIn2[8] = { 4234, 234, 434, 42, 988, 34, 6546, 345 };
+	asm_rotate(vectorIn2, 8);
 
 }
 
@@ -350,6 +353,11 @@ int main(void) {
 	// EJERCICIO 8 -----------------------------------------------------------------
 	//
 	test_exercise_asm_8();
+
+	//
+	// EJERCICIO 9 -----------------------------------------------------------------
+	//
+	test_exercise_asm_9();
 
 	//
 	// -------------------------- END EJERCICIOS ------------------------------------
