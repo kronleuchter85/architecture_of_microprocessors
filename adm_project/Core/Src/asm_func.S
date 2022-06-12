@@ -609,11 +609,21 @@
 		push	{r9}
 		
 		@
+		@ voy a usar r10 para guardar una constante 4 bytes
+		@
+		push	{r10}
+		
+		@
 		@ inicializo los indexadores
 		@
 		mov		r6 , 0
 		mov		r5 , 0
 		mov		r4 , 0
+		
+		@
+		@ guardo la constante que indica 4 bytes en r10
+		@
+		mov		r10 , 4
 		
 		@
 		@ trabajo con N-1 (como en el algoritmo en C)
@@ -626,12 +636,12 @@
 		@ calculo el siguiente elemento del arreglo
 		@ y lo cargo en r8
 		@
-		mul		r7 , r6 , 4
+		mul		r7 , r6 , r10
 		
 		@
 		@ tambien hago lo mismo con el siguiente elemento del array de salida
 		@
-		mul		r9 , r5 , 4
+		mul		r9 , r5 , r10
 		
 		@
 		@ traigo el elemento actual vectorIn[i]
@@ -641,7 +651,7 @@
 		@
 		@ if (added < N-1)
 		@
-		cmp		r4 , r4
+		cmp		r4 , r3
 		blt		asm_downsampleM_IfLessThan
 		b		asm_downsampleM_ElseIfEqualOrGreaterThan
 		
@@ -675,6 +685,7 @@
 		cmp		r6 , r2
 		bne		asm_downsampleM_InitLoop
 		
+		pop		{r10}
 		pop		{r9}
 		pop		{r8}
 		pop		{r7}

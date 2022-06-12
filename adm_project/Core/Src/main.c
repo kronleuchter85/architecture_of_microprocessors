@@ -251,7 +251,10 @@ void test_exercise_asm_8() {
 
 	int32_t vectorIn[8] = { -4234, -234, -434, 42, -988, 34, -6546, -345 };
 	int32_t vectorOut[6];
+	int32_t vectorOut2[6];
 	downsampleM(vectorIn, vectorOut, 8, 3);
+	asm_downsampleM(vectorIn, vectorOut2, 8, 3);
+
 }
 
 /**
