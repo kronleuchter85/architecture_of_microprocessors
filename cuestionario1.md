@@ -115,6 +115,12 @@ arrival.
 portabilidad de los sistemas operativos embebidos?
 
 18. ¿Qué funciones cumple la unidad de protección de memoria (MPU)?
+
+> MPU es una versión reducida de la unidad de administración de memoria (MMU) que solo brinda soporte de protección de memoria. Se implementa en procesadores de baja potencia que solo requieren protección de memoria y no necesitan la función completa de una unidad de administración de memoria como la administración de memoria virtual. 
+> La MPU permite que el software privilegiado defina regiones de memoria y les asigne permisos de acceso y atributos (el numero de regiones varia dependiendo del procesador), para luego monitorear las transacciones, incluida la obtención de instrucciones y el acceso a datos desde el procesador, lanzando una excepción de falla cuando se detecta una infracción de acceso. Por lo tanto, el objetivo principal de la protección de la memoria es evitar que un proceso acceda a la memoria que no se le ha asignado. Esto evita que un error o malware dentro de un proceso afecte a otros procesos o al propio sistema operativo.
+
+
+
 19. ¿Cuántas regiones pueden configurarse como máximo? ¿Qué ocurre en caso de haber
 solapamientos de las regiones? ¿Qué ocurre con las zonas de memoria no cubiertas por las
 regiones definidas?
