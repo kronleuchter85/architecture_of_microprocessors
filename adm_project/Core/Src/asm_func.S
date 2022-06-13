@@ -15,6 +15,7 @@
 .global asm_get_max
 .global asm_downsampleM
 .global asm_rotate
+.global asm_pack32_to_16
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
@@ -463,6 +464,59 @@
 		bx lr
 		
 
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@	EJERCICIO 6)
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C":
+@ void asm_pack32_to_16(int32_t *vectorIn, int16_t *vectorOut, uint32_t length);
+@
+@ Parametros recibidos:
+@   r0: * vector
+@   r1: * vector
+@	r2: length
+@
+.thumb_func
+	asm_pack32_to_16:
+		
+		push	{r3}
+		push	{r4}
+		push	{r5}
+		
+	asm_pack32_to_16_InitLoop:
+	
+		ldr		r3 , [r0] , 4
+		
+		@
+		@ aplico la mascara y guardo en R5 
+		@ como registro auxiliar
+		@ 
+		@
+		@ and		r5 , r3 , 0xffff0000
+		and		r5 , r3 , 0xff00
+		lsr		r5 , r5 , 16
+
+		lsr		r4 , r3 , 16
+		
+		@
+		@ almaceno en vectorOut el registro R4 e incremento en 2
+		@ para el siguiente
+		@
+		str		r4 , [r1] , 2
+		 
+		subs	r2 , 1
+		cmp		r2 , 0
+		
+		bgt		asm_pack32_to_16_InitLoop
+	
+	asm_pack32_to_16_End:
+		
+		pop		{r4}
+		pop		{r3}
+
+        bx 		lr
+        
+        
         
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @	EJERCICIO 7)

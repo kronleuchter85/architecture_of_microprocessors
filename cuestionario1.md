@@ -92,6 +92,35 @@ privilegiado a no priviligiado y nuevamente a privilegiado.
 8. ¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un
 ejemplo
 
+> 
+> Respuesta:
+> Las instrucciones condicionales que comienzan con IT permiten ejecutar logica condicional de hasta cuatro instrucciones de la forma if-then-then-*-else.
+> Por ejemplo si quisieramos ejecutar la siguiente logica condicional:
+> 
+> //
+> // codigo C
+> // 
+> if(EQ) {
+> 	MOV R0,R1
+>	ADD R2,R2,10
+> } else {
+>	AND R3,R3,1
+> }
+> 
+> Hariamos:
+> 
+> @
+> @ codigo assembler
+> @
+> ITTEE  EQ
+> MOVEQ  R0, R1
+> ADDEQ  R2, R2, #10
+> ANDNE  R3, R3, #1
+> 
+> Fuentes:
+> - [Conditional Execution](https://azeria-labs.com/arm-conditional-execution-and-branching-part-6/)
+> - []()
+> 
 
 9. Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).
 

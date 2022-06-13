@@ -100,7 +100,7 @@ void windowFilter10(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t vecInLengt
 void pack32_to_16(int32_t *vectorIn, int16_t *vectorOut, uint32_t length) {
 
 	uint32_t i = 0;
-	uint32_t mask = 0xffff0000;
+	int32_t mask = 0xffff0000;
 	for (i = 0; i < length; i++) {
 
 		int32_t value = vectorIn[i];
@@ -109,6 +109,7 @@ void pack32_to_16(int32_t *vectorIn, int16_t *vectorOut, uint32_t length) {
 		int16_t packedOne = (int16_t) transformed;
 		vectorOut[i] = packedOne;
 	}
+
 }
 
 // -------------------------------------------------------------------------------------------------------
