@@ -1,8 +1,7 @@
 
 # Cortex M
 
-1. Describa brevemente las diferencias entre las familias de procesadores Cortex M0, M3 y
-M4.
+1. Describa brevemente las diferencias entre las familias de procesadores Cortex M0, M3 y M4.
 
 > 
 > Respuesta:
@@ -15,8 +14,7 @@ misma arquitectura y conjunto de instrucciones Thumb-2. Sin embargo, el Cortex-M
 > Otra diferencia clave en el Cortex M0+ es la adición del búfer de micro trazas (MTB). Estos periféricos le permiten dedicar parte de la memoria RAM del chip para almacenar ramas del programa durante la depuración. Estas ramas se pueden volver a pasar al entorno de desarrollo integrado (IDE), y el flujo del programa  puede ser reconstruido. Esta capacidad proporciona una forma rudimentaria de seguimiento de instrucciones y compensa el hecho de no tener la macrocélula de seguimiento extendida (ETM) que se encuentra en los Cortex-M3 y Cortex-M4. El nivel de información de depuración que puede extraer de un Cortex M0+ es significativamente mayor que el que puede obtener de una MCU de 8 bits, lo que significa que esos errores difíciles de resolver ahora son más fáciles de corregir.
 > 
 
-2. ¿Por qué se dice que el set de instrucciones Thumb permite mayor densidad de código?
-Explique
+2. ¿Por qué se dice que el set de instrucciones Thumb permite mayor densidad de código? Explique
 
 > 
 > Respuesta:
@@ -28,8 +26,7 @@ Explique
 > - [arm Developer - The Thumb instruction set](https://developer.arm.com/documentation/ddi0210/c/CACBCAAE)
 > 
 
-3. ¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este
-tipo de arquitectura?
+3. ¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este tipo de arquitectura?
 
 > 
 > Respuesta:
@@ -74,9 +71,7 @@ tipo de arquitectura?
 >  
 
 
-6. Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y
-como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo
-privilegiado a no priviligiado y nuevamente a privilegiado.
+6. Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo privilegiado a no priviligiado y nuevamente a privilegiado.
 
 > 
 > Respuesta: 
@@ -89,8 +84,7 @@ privilegiado a no priviligiado y nuevamente a privilegiado.
 > La ortogonalidad en el modelo de registros significa que la arquitectura soporta que todos los tipos de instrucciones del procesador pueden utilizar todos los modos de direccionamiento. Por lo tanto es "ortogonal" en el sentido de que el tipo de instruccion y el modo de direccionamiento varian independientemente, no imponiendo una limitacion de requerir una determinada instruccion para utilizar un registro especifico permitiendo entonces menor superposicion de la funcionalidad entre las instrucciones.
 >  
 
-8. ¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un
-ejemplo
+8. ¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un ejemplo
 
 > 
 > Respuesta:
@@ -119,18 +113,30 @@ ejemplo
 > 
 > Fuentes:
 > - [Conditional Execution](https://azeria-labs.com/arm-conditional-execution-and-branching-part-6/)
-> - []()
 > 
 
 9. Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).
 
-10. Describa las funciones principales de la pila. ¿Cómo resuelve la arquitectura el llamado
-a funciones y su retorno?
+10. Describa las funciones principales de la pila. ¿Cómo resuelve la arquitectura el llamado a funciones y su retorno?
 
 11. Describa la secuencia de reset del microprocesador.
 
-12. ¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de
-los periféricos?
+> 
+> Respuesta:
+> La secuencia de reset es:
+> 1. Despues de lanzado el reset, el PC (contador de programa) es cargado con la direccion 0x00000000
+> 2. El procesador lee el valor de esa direccion de memoria y lo guarda en MSP (stack pointer)
+> 3. El procesador lee la direccion del handler de reset de la direccion de memoria 0x00000004 y la guarda en el PC
+> 4. El procesador comienza a ejecutar las rutinas del handler de reset saltando a la primer instruccion
+> 5. Luego de la ejecucion del handler se invoca a la funcion main del programa
+> 
+> Por lo anterior se espera que el programador defina el handler de reset con la logica necesaria para ser ejecutada previa al main y que ponga la direccion de memoria correcta del MSP en la posicion 0x00000000.
+> 
+> Fuentes:
+> - [Youtube Video: ARM Cortex M3/M4 Processor Reset Sequence ](https://www.youtube.com/watch?v=qMH2MBGuG3E)
+> 
+
+12. ¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de los periféricos?
 > 
 > Respuesta:
 > 
@@ -176,8 +182,7 @@ los periféricos?
 > 
 
 
-15. Cuando ocurre una interrupción, asumiendo que está habilitada ¿Cómo opera el
-microprocesador para atender a la subrutina correspondiente? Explique con un ejemplo
+15. Cuando ocurre una interrupción, asumiendo que está habilitada ¿Cómo opera el microprocesador para atender a la subrutina correspondiente? Explique con un ejemplo
 
 > 
 > Respuesta:
@@ -188,11 +193,9 @@ microprocesador para atender a la subrutina correspondiente? Explique con un eje
 > - [A Practical guide to ARM Cortex-M Exception Handling](https://interrupt.memfault.com/blog/arm-cortex-m-exceptions-and-nvic)
 
 
-16. Explique las características avanzadas de atención a interrupciones: tail chaining y late
-arrival.
+16. Explique las características avanzadas de atención a interrupciones: tail chaining y late arrival.
 
-17. ¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la
-portabilidad de los sistemas operativos embebidos?
+17. ¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la portabilidad de los sistemas operativos embebidos?
 
 17. ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante?
 
@@ -208,9 +211,7 @@ portabilidad de los sistemas operativos embebidos?
 > - [arm Developer - About the MPU](https://developer.arm.com/documentation/ddi0363/e/memory-protection-unit/about-the-mpu)
 > - [Unidad de Proteccion de Memoria](https://hmong.es/wiki/Memory_protection_unit)
 
-19. ¿Cuántas regiones pueden configurarse como máximo? ¿Qué ocurre en caso de haber
-solapamientos de las regiones? ¿Qué ocurre con las zonas de memoria no cubiertas por las
-regiones definidas?
+19. ¿Cuántas regiones pueden configurarse como máximo? ¿Qué ocurre en caso de haber solapamientos de las regiones? ¿Qué ocurre con las zonas de memoria no cubiertas por las regiones definidas?
 
 > 
 > Respuesta:
@@ -221,21 +222,15 @@ regiones definidas?
 > - [arm Developer - Overlaping Regions](https://developer.arm.com/documentation/ddi0363/e/memory-protection-unit/about-the-mpu/overlapping-regions)
 > - [arm Developer - Background Regions](https://developer.arm.com/documentation/ddi0363/e/memory-protection-unit/about-the-mpu/background-regions)
 
-20. ¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto
-de las excepciones? Dé un ejemplo
+20. ¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto de las excepciones? Dé un ejemplo
 
-21. ¿Para qué se suele utilizar la excepción SVC? Expliquelo dentro de un marco de un
-sistema operativo embebido.
+21. ¿Para qué se suele utilizar la excepción SVC? Expliquelo dentro de un marco de un sistema operativo embebido.
 
 # ISA
 
 1. ¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo
 2. ¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo
-3. ¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un
-ejemplo con operaciones con datos de 8 bits.
+3. ¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits.
 
-4. Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos
-de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la
-pila antes de ser modificados?
-5. ¿Qué es una instrucción SIMD? ¿En qué se aplican y que ventajas reporta su uso? Dé un
-ejemplo.
+4. Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados?
+5. ¿Qué es una instrucción SIMD? ¿En qué se aplican y que ventajas reporta su uso? Dé un ejemplo.
