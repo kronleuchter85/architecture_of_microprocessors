@@ -238,5 +238,9 @@ misma arquitectura y conjunto de instrucciones Thumb-2. Sin embargo, el Cortex-M
 2. ¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo
 3. ¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits.
 
+> Respuesta: 
+> Las instrucciones de aritmetica saturada permiten establecer limites por software (máximos y minimos) para acotar y converger resultados en operaciones aritmeticas. Esto evita probelmas como overflow/underflow
+> 
+
 4. Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados?
 5. ¿Qué es una instrucción SIMD? ¿En qué se aplican y que ventajas reporta su uso? Dé un ejemplo.
