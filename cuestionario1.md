@@ -197,6 +197,12 @@ misma arquitectura y conjunto de instrucciones Thumb-2. Sin embargo, el Cortex-M
 
 17. ¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la portabilidad de los sistemas operativos embebidos?
 
+> 
+> Respuesta:
+> El systick es una interrupción  generada cada un intervalo establecido por un timer en el procesador. Se utiliza para establecer una forma de medir el tiempo y es posible asociarle interrupciones para ser lanzadas por cada tick. Se puede decir que favorece a la portabilidad de los sistemas operativos embebidos, en realidad a la portabilidad de cualquier sistema operativo, porque sirve de capa de abstraccion para que el software del sistema operativo acceda a esta funcionalidad como un servicio en lugar de tener que estar implementando una logica para medir el tiempo. De esta manera las implementaciones de sistemas operativos que se apalancan sobre el consumo del systick provisto por el hardware resultan mas portables que si lo intentaran implementar nativamente. 
+> 
+> 
+
 17. ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante?
 
 18. ¿Qué funciones cumple la unidad de protección de memoria (MPU)?
