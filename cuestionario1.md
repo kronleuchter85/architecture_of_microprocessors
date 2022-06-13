@@ -235,7 +235,22 @@ misma arquitectura y conjunto de instrucciones Thumb-2. Sin embargo, el Cortex-M
 # ISA
 
 1. ¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo
+
+> 
+> Respuesta:
+>  Los sufijos permiten agregar funcionalidad adicional a las instrucciones. Algunos ejemplos son b, sb, h, sh. Por ejemplo, ejecutando LDRB se puede ademas de traer a un registro el valor de memoria, se completan los 8 bits superiores con cero.
+> 
+> 
+
 2. ¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo
+
+> 
+> Respuesta:
+> 
+> El sufijo 's' se usa para adicionar la logica de actualizacion de los flags de estado (N, Z, C y V) ademas de la funcionalidad realizada por la instruccion principal. Por ejemplo, la instrucción SUBS realiza la resta entre los valores de dos registros pero ademas actualiza los flags de estado permitiendo posteriormente ejecutar logica condicional en base al resultado de la substraccion.
+> 
+> 
+
 3. ¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits.
 
 > Respuesta: 
@@ -243,4 +258,18 @@ misma arquitectura y conjunto de instrucciones Thumb-2. Sin embargo, el Cortex-M
 > 
 
 4. Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados?
+
+> 
+> Respuesta:
+> 
+> Por convención, los argumentos de las funciones son recibidos en los primeros 4 registros de propósito general r0-r3. Si la función presenta más de 4 parámetros, serán recibidos en el stack. En cuanto al retorno de la función, este se almacena en el registro r0 si es de 32 bits, o en r0 y r1 si es de 64 bits. Para poder regresar a la dirección de memoria correspondiente, se utiliza el registro LR (link register), que almacena la dirección de la instrucción siguiente que debe ser ejecutada en el programa principal.
+> 
+
 5. ¿Qué es una instrucción SIMD? ¿En qué se aplican y que ventajas reporta su uso? Dé un ejemplo.
+
+> 
+> Respuesta:
+> 
+> Las SIMD (Single Instruction Multiple Data) son instrucciones que pueden realizar una misma operación sobre más de un dato, permitiendo implementar paralelismo a nivel de datos. Por ejemplo, la instrucción SADD16 permite sumar en paralelo y por separado la parte alta y baja de sus operandos guardando el resultado en el primer parametro, tambien separado entre parte alta y parte baja.
+> 
+
