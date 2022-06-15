@@ -116,8 +116,21 @@ misma arquitectura y conjunto de instrucciones Thumb-2. Sin embargo, el Cortex-M
 > 
 
 9. Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).
-
+> 
+> Respuesta: TODO
+> 
+> 
+> Fuentes:
+> - []()
+> - []()
 10. Describa las funciones principales de la pila. ¿Cómo resuelve la arquitectura el llamado a funciones y su retorno?
+> 
+> Respuesta: TODO
+> 
+> 
+> Fuentes:
+> - []()
+> - []()
 
 11. Describa la secuencia de reset del microprocesador.
 
@@ -138,7 +151,7 @@ misma arquitectura y conjunto de instrucciones Thumb-2. Sin embargo, el Cortex-M
 
 12. ¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de los periféricos?
 > 
-> Respuesta:
+> Respuesta: TODO
 > 
 > 
 > Fuentes:
@@ -147,7 +160,7 @@ misma arquitectura y conjunto de instrucciones Thumb-2. Sin embargo, el Cortex-M
 > 
 13. ¿Cómo se implementan las prioridades de las interrupciones? Dé un ejemplo
 > 
-> Respuesta:
+> Respuesta: TODO 
 > 
 > 
 > Fuentes:
@@ -181,12 +194,10 @@ misma arquitectura y conjunto de instrucciones Thumb-2. Sin embargo, el Cortex-M
 > - []()
 > 
 
-
 15. Cuando ocurre una interrupción, asumiendo que está habilitada ¿Cómo opera el microprocesador para atender a la subrutina correspondiente? Explique con un ejemplo
 
 > 
-> Respuesta:
-> 
+> Respuesta: TODO
 > 
 > Fuentes:
 > - [arm Developer - Handling Interrupts](https://developer.arm.com/documentation/198123/0302/Handling-interrupts?lang=en)
@@ -194,6 +205,13 @@ misma arquitectura y conjunto de instrucciones Thumb-2. Sin embargo, el Cortex-M
 
 
 16. Explique las características avanzadas de atención a interrupciones: tail chaining y late arrival.
+> 
+> Respuesta: TODO
+> 
+> 
+> Fuentes:
+> - []()
+> - []()
 
 17. ¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la portabilidad de los sistemas operativos embebidos?
 
@@ -203,7 +221,14 @@ misma arquitectura y conjunto de instrucciones Thumb-2. Sin embargo, el Cortex-M
 > 
 > 
 
-17. ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante?
+17 (bis). ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante?
+> 
+> Respuesta: TODO
+> 
+> 
+> Fuentes:
+> - []()
+> - []()
 
 18. ¿Qué funciones cumple la unidad de protección de memoria (MPU)?
 
@@ -229,8 +254,22 @@ misma arquitectura y conjunto de instrucciones Thumb-2. Sin embargo, el Cortex-M
 > - [arm Developer - Background Regions](https://developer.arm.com/documentation/ddi0363/e/memory-protection-unit/about-the-mpu/background-regions)
 
 20. ¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto de las excepciones? Dé un ejemplo
+> 
+> Respuesta: TODO
+> 
+> 
+> Fuentes:
+> - []()
+> - []()
 
 21. ¿Para qué se suele utilizar la excepción SVC? Expliquelo dentro de un marco de un sistema operativo embebido.
+> 
+> Respuesta: TODO
+> 
+> 
+> Fuentes:
+> - []()
+> - []()
 
 # ISA
 

@@ -28,4 +28,4 @@
 	- [Ejercicio 7](https://github.com/kronleuchter85/architecture_of_microprocessors/blob/8aee0c3f4e028cfc3ca8540a3bfa092184c41fcc/adm_project/Core/Src/asm_func.S#L522)
 	- [Ejercicio 8](https://github.com/kronleuchter85/architecture_of_microprocessors/blob/8aee0c3f4e028cfc3ca8540a3bfa092184c41fcc/adm_project/Core/Src/asm_func.S#L618)
 	- [Ejercicio 9](https://github.com/kronleuchter85/architecture_of_microprocessors/blob/8aee0c3f4e028cfc3ca8540a3bfa092184c41fcc/adm_project/Core/Src/asm_func.S#L754)
-- [Questionario de preguntas y respuestas teoricas](./cuestionario1.md)
+- [Cuestionario de preguntas y respuestas teoricas](./cuestionario1.md)
